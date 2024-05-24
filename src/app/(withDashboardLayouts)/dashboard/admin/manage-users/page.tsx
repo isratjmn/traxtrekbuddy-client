@@ -8,7 +8,7 @@ import {
 import { useDebounced } from "@/redux/hooks";
 import React, { useEffect, useState } from "react";
 import Pagination from "@/component/Forms/Pagination";
-import { ToastContainer, toast } from "react-toastify";
+import toast, { Toaster } from "react-hot-toast";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -57,7 +57,7 @@ const ManageUsers = () => {
 			});
 			console.log(updatedUser);
 
-			toast.success("User role updated successfully", updatedUser);
+			toast.success("User role updated successfully....");
 		} catch (error) {
 			toast.error("Failed to update user role");
 		}
@@ -74,7 +74,7 @@ const ManageUsers = () => {
 			});
 			console.log(updatedStatus);
 
-			toast.success("User status updated successfully", updatedStatus);
+			toast.success("User status updated successfully......");
 		} catch (error) {
 			toast.error("Failed to update user status");
 		}
@@ -99,8 +99,8 @@ const ManageUsers = () => {
 
 	return (
 		<div className="w-full py-10">
-			<ToastContainer />
-			<h1 className="text-center text-3xl font-bold text-green-600 pb-8">
+			<Toaster position="top-center" />
+			<h1 className="text-center text-3xl font-bold text-teal-600 pb-8">
 				Manage Users
 			</h1>
 			<div className="border">
@@ -137,7 +137,7 @@ const ManageUsers = () => {
 												type="button"
 												className={`inline-flex justify-center items-center w-24 px-4 py-2 text-sm font-medium text-white ${
 													user?.role === "admin"
-														? "bg-green-700"
+														? "bg-teal-700"
 														: "bg-gray-500"
 												} hover:bg-gray-500 focus:outline-none focus:bg-gray-700`}
 											>

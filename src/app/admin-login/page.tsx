@@ -9,9 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FieldValues } from "react-hook-form";
-// import { ToastContainer, toast } from "react-toastify";
 import { z } from "zod";
-
 import toast, { Toaster } from "react-hot-toast";
 
 const loginValidationSchema = z.object({
@@ -19,7 +17,7 @@ const loginValidationSchema = z.object({
 	password: z.string().min(6, "Must be at least 6 characters"),
 });
 
-const LoginPage = () => {
+const AdminLogin = () => {
 	const router = useRouter();
 	const [loading, setLoading] = useState<boolean>(false);
 	const [error, setError] = useState<string>("");
@@ -52,7 +50,7 @@ const LoginPage = () => {
 						className="font-bold text-3xl
                     pb-4"
 					>
-						Login
+						login (admin)
 						<Link
 							href="/"
 							className="text-3xl pl-2 font-bold text-black hover:text-teal-500 transition"
@@ -119,4 +117,4 @@ const LoginPage = () => {
 	);
 };
 
-export default LoginPage;
+export default AdminLogin;

@@ -36,9 +36,7 @@ const teamInfo = [
 
 const AboutUsPage = () => {
 	return (
-		// navbar bg-base-100 fixed top-0 left-0 w-full shadow-md z-50 px-6
-
-		<div className=" mx-auto relative mb-20 w-full object-cover bg-center bg-no-repeat">
+		<div className=" mx-auto relative max-w-[1440px] object-cover bg-center bg-no-repeat">
 			<div className="relative w-full h-screen container-lg">
 				<Image
 					src={bannerImage}
@@ -67,7 +65,7 @@ const AboutUsPage = () => {
 				and enjoyable.
 			</p>
 
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[1440px] mx-auto mt-8">
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1440px] mx-auto mt-8">
 				{teamInfo.map((item, index) => (
 					<div
 						key={index}

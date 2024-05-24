@@ -21,14 +21,14 @@ const Footer = () => {
                         height={60}
                         alt="brand logo" />
                     <Link href="/" className="text-2xl font-bold text-white hover:text-white-500 transition">
-                        Trek<span className="text-green-500">Trex</span>-Travel
+                        Trek<span className="text-teal-500">Trex</span>-Travel
                     </Link>
                     <p className="text-lg mt-2 lg:mt-4 text-white-500 xl:max-w-[280px]">
                         We want to be on each of your journeys seeking the satisfaction of seeing the incorruptible beauty of nature. We can help you on an adventure around the world in just one app.
                     </p>
                 </div>
                 <div className="space-y-2">
-                    <h5 className="text-xl text-green-500">Customers</h5>
+                    <h5 className="text-xl text-teal-500">Customers</h5>
                     <ul className="space-y-1">
                         <li><Link href="#"><span className="hover:underline">Buyer</span></Link></li>
                         <li><Link href="#"><span className="hover:underline">Supplier</span></Link></li>
@@ -39,7 +39,7 @@ const Footer = () => {
                     </ul>
                 </div>
                 <div className="space-y-2">
-                    <h5 className="text-xl text-green-500">Company</h5>
+                    <h5 className="text-xl text-teal-500">Company</h5>
                     <ul className="space-y-1">
                         <li><Link href="#"><span className="hover:underline">About us</span></Link></li>
                         <li><Link href="#"><span className="hover:underline">Careers</span></Link></li>
@@ -50,7 +50,7 @@ const Footer = () => {
                     </ul>
                 </div>
                 <div className="space-y-2">
-                    <h5 className="text-xl text-green-500">Further Information</h5>
+                    <h5 className="text-xl text-teal-500">Further Information</h5>
                     <ul className="space-y-1">
                         <li><Link href="#"><span className="hover:underline">Terms & Conditions</span></Link></li>
                         <li><Link href="#"><span className="hover:underline">Privacy Policy</span></Link></li>
@@ -59,7 +59,7 @@ const Footer = () => {
                     </ul>
                 </div>
                 <div className="space-y-2">
-                    <h5 className="text-xl text-green-500">Follow us</h5>
+                    <h5 className="text-xl text-teal-500">Follow us</h5>
                     <div className="flex space-x-4">
                         <Link href="#"><span className="hover:text-indigo-400"><FaFacebookF /></span></Link>
                         <Link href="#"><span className="hover:text-indigo-400"><FaTwitter /></span></Link>
@@ -86,8 +86,8 @@ export default Footer;
                         width={40}
                         height={40}
                         alt="brand logo" />
-                    <Link href="/" className="text-xl font-bold text-black hover:text-green-500 transition">
-                        Trek<span className="text-green-500">Trex</span>-Travel
+                    <Link href="/" className="text-xl font-bold text-black hover:text-teal-500 transition">
+                        Trek<span className="text-teal-500">Trex</span>-Travel
                     </Link>
                 </div>
                 <p className="w-2/3 mt-2 text-black text-xl">

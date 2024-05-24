@@ -1,7 +1,11 @@
 "use client";
+import useUserInfo from "@/hooks/useUserInfo";
+import { useCreateTravelRequestMutation } from "@/redux/api/travelBuddyApi";
 import { useGetTripQuery } from "@/redux/api/tripApi";
 import { formattedDates } from "@/utilities/formatDates";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 type TProps = {
 	params: {
@@ -10,21 +14,59 @@ type TProps = {
 };
 
 const TravelDetails = ({ params }: TProps) => {
-	const { data, isLoading } = useGetTripQuery(params?.tripsId);
-	console.log(data);
+	const user = useUserInfo();
+	const { data: getTrip, isLoading } = useGetTripQuery(params?.tripsId);
+	const [createTravelRequest] = useCreateTravelRequestMutation();
+	const [requestCount, setRequestCount] = useState(0);
+
+	useEffect(() => {
+		if (!user) {
+			toast.error("Please log in to request a travel buddy.");
+		}
+	}, [user]);
+
+	useEffect(() => {
+		if (getTrip) {
+			setRequestCount(getTrip?.travelBuddyRequests?.length);
+		}
+	}, [getTrip]);
 
 	if (isLoading) return <div className="my-4">Loading...</div>;
 
+	const handleBuddyReq = async () => {
+		const toastId = toast.loading("Requesting...");
+		try {
+			const requestData = {
+				tripId: params.tripsId,
+				userId: user?.id,
+			};
+			const res = await createTravelRequest(requestData).unwrap();
+			if (res?.id) {
+				toast.success("Travel buddy request sent successfully", {
+					id: toastId,
+					duration: 2000,
+				});
+				setRequestCount((prevCount) => prevCount + 1);
+			}
+		} catch (error) {
+			toast.error("Something went wrong!", {
+				id: toastId,
+				duration: 2000,
+			});
+		}
+	};
+
 	return (
 		<div className=" text-black mt-4">
+			<Toaster />
 			<div className="mx-auto w-full">
 				<header
 					className="bg-cover object-top bg-center h-[500px] w-full relative z-10"
-					style={{ backgroundImage: `url(${data?.photos})` }}
+					style={{ backgroundImage: `url(${getTrip?.photos})` }}
 				>
 					<div className="bg-white bg-opacity-50 h-full flex items-center justify-center">
 						<h1 className="text-5xl font-extrabold">
-							{data?.destination}
+							{getTrip?.destination}
 						</h1>
 					</div>
 				</header>
@@ -36,7 +78,9 @@ const TravelDetails = ({ params }: TProps) => {
 					<h2 className="text-3xl mb-4 font-extrabold">
 						Description
 					</h2>
-					<p className="text-lg mb-4 w-[60%]">{data?.description}</p>
+					<p className="text-lg mb-4 w-[60%]">
+						{getTrip?.description}
+					</p>
 				</div>
 			</div>
 
@@ -70,7 +114,7 @@ const TravelDetails = ({ params }: TProps) => {
 
 				<div className="bg-blue-100 p-8 container-full rounded-lg shadow-md mb-12 w-full">
 					<h2 className="text-3xl mb-4 font-extrabold">
-						Travel details
+						Travel Details
 					</h2>
 					<table className="table-auto w-full border border-gray-600">
 						<tbody>
@@ -79,7 +123,7 @@ const TravelDetails = ({ params }: TProps) => {
 									Travel Type
 								</td>
 								<td className="text-lg border border-gray-400 px-4 py-3">
-									{data?.travelType}
+									{getTrip?.travelType}
 								</td>
 							</tr>
 							<tr>
@@ -87,7 +131,7 @@ const TravelDetails = ({ params }: TProps) => {
 									Start Date
 								</td>
 								<td className="text-lg location border border-gray-400 px-4 py-3">
-									{formattedDates(data?.startDate)}
+									{formattedDates(getTrip?.startDate)}
 								</td>
 							</tr>
 							<tr>
@@ -95,7 +139,7 @@ const TravelDetails = ({ params }: TProps) => {
 									End Date
 								</td>
 								<td className="text-lg location border border-gray-400 px-4 py-3">
-									{formattedDates(data?.endDate)}
+									{formattedDates(getTrip?.endDate)}
 								</td>
 							</tr>
 							<tr>
@@ -103,7 +147,7 @@ const TravelDetails = ({ params }: TProps) => {
 									Itinerary
 								</td>
 								<td className="text-lg border border-gray-400 px-4 py-3">
-									{data?.itinerary}
+									{getTrip?.itinerary}
 								</td>
 							</tr>
 							<tr>
@@ -111,11 +155,25 @@ const TravelDetails = ({ params }: TProps) => {
 									Location
 								</td>
 								<td className="font-xl border border-gray-400 px-4 py-3">
-									{data?.location}
+									{getTrip?.location}
 								</td>
 							</tr>
 						</tbody>
 					</table>
+					<div className="mt-6">
+						<button
+							onClick={handleBuddyReq}
+							disabled={requestCount >= 2}
+							type="submit"
+							className={`bg-teal-600 ${
+								requestCount >= 2
+									? "cursor-not-allowed"
+									: "hover:bg-teal-800"
+							} text-white font-bold py-2 px-4 rounded`}
+						>
+							Request to Join Trip
+						</button>
+					</div>
 				</div>
 
 				<div className="bg-gray-800 container p-8 rounded-lg shadow-md mb-12 w-full mx-0">

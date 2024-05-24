@@ -21,7 +21,7 @@ const FileUploader = ({
 }: IFileUploadButton) => {
     return (
         <label className="cursor-pointer">
-            <span className="flex items-center space-x-2 py-2 px-4 bg-green-500 text-white rounded-md">
+            <span className="flex items-center space-x-2 py-2 px-4 bg-teal-500 text-white rounded-md">
                 <AiOutlineCloudUpload className="w-5 h-5" />
                 <span>{label || "Upload file"}</span>
             </span>

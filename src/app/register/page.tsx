@@ -9,8 +9,9 @@ import TTInput from "@/component/Forms/TTInput";
 import { storeUserInfo } from "@/services/auth.service";
 import { UserLogin } from "@/services/actions/UserLogin";
 import { userRegister } from "@/services/actions/userRegister";
-import { ToastContainer, toast } from "react-toastify";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+import toast, { Toaster } from "react-hot-toast";
 
 const schemaValidation = z.object({
 	name: z.string().min(1, { message: "Name is required" }),
@@ -40,8 +41,6 @@ const RegisterPage = () => {
 					email: values.email,
 					password: values.password,
 				});
-				console.log(result);
-
 				if (result?.data?.token) {
 					storeUserInfo({ accessToken: result?.data?.token });
 					router.push("/login");
@@ -55,16 +54,17 @@ const RegisterPage = () => {
 
 	return (
 		<div className="flex items-center justify-center h-screen bg-gray-100">
-			<ToastContainer />
+			<Toaster position="top-center" />
+
 			<div className="w-full max-w-2xl p-8 bg-white shadow-md rounded-md border-2 border-gray-300 text-center">
 				<div className="flex flex-col items-center mb-4">
 					<h2 className="font-bold text-2xl mt-4">
 						Register
 						<Link
 							href="/"
-							className="text-2xl pl-2 font-bold text-black hover:text-green-500 transition"
+							className="text-2xl pl-2 font-bold text-black hover:text-teal-500 transition"
 						>
-							Trek<span className="text-green-500">Trex</span>
+							Trek<span className="text-teal-500">Trex</span>
 							-Travel
 						</Link>
 					</h2>
@@ -103,7 +103,7 @@ const RegisterPage = () => {
 						/>
 					</div>
 					<button
-						className="w-full py-2 bg-green-500 text-white rounded-md mb-4"
+						className="w-full py-2 bg-teal-500 text-white rounded-md mb-4"
 						type="submit"
 					>
 						Register
@@ -111,7 +111,7 @@ const RegisterPage = () => {
 					<p className="text-gray-700 font-semibold">
 						Do you have an account?{" "}
 						<Link href="/login">
-							<strong className="text-green-500 underline">
+							<strong className="text-teal-500 underline">
 								Login
 							</strong>
 						</Link>

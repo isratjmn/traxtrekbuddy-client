@@ -1,5 +1,5 @@
 "use client";
-
+import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
@@ -11,6 +11,7 @@ import { logoutUser } from "@/services/actions/logOutUser";
 const NavBar = () => {
 	const userInfo = useUserInfo();
 	const router = useRouter();
+
 	const handleLogout = () => {
 		logoutUser(router);
 	};
@@ -47,7 +48,7 @@ const NavBar = () => {
 							<li>
 								<Link
 									href="/"
-									className="text-[16px] text-gray-700 hover:text-green-600 transition"
+									className="text-[16px] text-gray-700 hover:text-teal-600 transition"
 								>
 									Home
 								</Link>
@@ -55,7 +56,7 @@ const NavBar = () => {
 							<li>
 								<Link
 									href="/about"
-									className="text-[16px] text-gray-700 hover:text-green-600 transition"
+									className="text-[16px] text-gray-700 hover:text-teal-600 transition"
 								>
 									About Us
 								</Link>
@@ -63,7 +64,7 @@ const NavBar = () => {
 							<li>
 								<Link
 									href="/travels"
-									className="text-[16px] text-gray-700 hover:text-green-600 transition"
+									className="text-[16px] text-gray-700 hover:text-teal-600 transition"
 								>
 									Travels
 								</Link>
@@ -71,7 +72,7 @@ const NavBar = () => {
 							<li>
 								<Link
 									href="/my-profile"
-									className="text-[16px] text-gray-700 hover:text-green-600 transition"
+									className="text-[16px] text-gray-700 hover:text-teal-600 transition"
 								>
 									My Profile
 								</Link>
@@ -87,9 +88,9 @@ const NavBar = () => {
 						/>
 						<Link
 							href="/"
-							className="text-2xl font-bold text-black hover:text-green-500 transition"
+							className="text-2xl font-bold text-black hover:text-teal-500 transition"
 						>
-							Trek<span className="text-green-600">Trex</span>
+							Trek<span className="text-teal-600">Trex</span>
 							-Travel
 						</Link>
 					</div>
@@ -99,7 +100,7 @@ const NavBar = () => {
 						<li>
 							<Link
 								href="/"
-								className="text-lg text-black font-bold hover:text-green-500 transition"
+								className="text-lg text-black font-bold hover:text-teal-500 transition"
 							>
 								Home
 							</Link>
@@ -107,7 +108,7 @@ const NavBar = () => {
 						<li>
 							<Link
 								href="/about"
-								className="text-lg text-bold text-black font-bold hover:text-green-500 transition"
+								className="text-lg text-bold text-black font-bold hover:text-teal-500 transition"
 							>
 								About Us
 							</Link>
@@ -115,7 +116,7 @@ const NavBar = () => {
 						<li>
 							<Link
 								href="/travels"
-								className="text-lg text-bold text-black font-bold hover:text-green-500 transition"
+								className="text-lg text-bold text-black font-bold hover:text-teal-500 transition"
 							>
 								Travels
 							</Link>
@@ -123,14 +124,15 @@ const NavBar = () => {
 						<li>
 							<Link
 								href="/my-profile"
-								className="text-lg text-black font-bold hover:text-green-500 transition"
+								className="text-lg text-black font-bold hover:text-teal-500 transition"
 							>
 								My Profile
 							</Link>
 						</li>
 					</ul>
 				</div>
-				<div className="navbar-end flex justify-end">
+
+				<div className="navbar-end flex justify-end gap-4">
 					{userInfo?.id ? (
 						<button
 							onClick={handleLogout}
@@ -140,11 +142,16 @@ const NavBar = () => {
 						</button>
 					) : (
 						<Link href="/login">
-							<button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded mt-4">
+							<button className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-8 rounded mt-4">
 								Login
 							</button>
 						</Link>
 					)}
+					<Link href="/dashboard">
+						<button className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-3 rounded mt-4">
+							<FaUser className="inline-block" />
+						</button>
+					</Link>
 				</div>
 			</div>
 		</div>

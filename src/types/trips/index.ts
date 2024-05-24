@@ -16,7 +16,7 @@ export interface IUsers {
 	email: string;
 	password: string;
 	role?: Role;
-	isActive: UserActive;
+	status: UserActive;
 }
 
 enum Role {

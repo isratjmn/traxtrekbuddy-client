@@ -48,7 +48,7 @@ const AllTrips = () => {
 				/>
 			</div>
 			{isLoading ? (
-				<div className="text-center text-xl m-3 text-green-600 font-extrabold">
+				<div className="text-center text-xl m-3 text-teal-600 font-extrabold">
 					Loading...
 				</div>
 			) : (

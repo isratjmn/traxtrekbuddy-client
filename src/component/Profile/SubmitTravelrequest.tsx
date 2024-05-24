@@ -3,17 +3,17 @@ import { useGetTravelBuddyQuery } from "@/redux/api/travelBuddyApi";
 import { useGetMyProfileQuery } from "@/redux/api/profileApi";
 
 const SubmitTravelRequest = () => {
-	const { data: getMyProfile, error, isLoading } = useGetMyProfileQuery({});
+	const { data: getMyProfile, isLoading } = useGetMyProfileQuery({});
 	console.log(getMyProfile);
 
 	return (
 		<div className="container mx-auto mt-10  lg:max-w-8xl">
-			<h2 className="text-2xl font-bold mb-6 mt-10 text-green-600">
+			<h2 className="text-2xl font-bold mb-6 mt-10 text-teal-600">
 				My Travel Request
 			</h2>
 
 			{isLoading ? (
-				<div className="text-center text-xl m-3 text-green-600 font-extrabold">
+				<div className="text-center text-xl m-3 text-teal-600 font-extrabold">
 					Loading...
 				</div>
 			) : (
@@ -60,7 +60,7 @@ const SubmitTravelRequest = () => {
 														{item?.status}
 													</span>
 												) : (
-													<span className="text-green-500 font-bold">
+													<span className="text-teal-500 font-bold">
 														{item?.status}
 													</span>
 												)}

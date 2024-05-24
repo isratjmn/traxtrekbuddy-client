@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDeleteTripMutation, useGetAllTipsQuery } from "@/redux/api/tripApi";
 import { useDebounced } from "@/redux/hooks";
 import Image from "next/image";
-import { ToastContainer, toast } from "react-toastify";
+import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Link from "next/link";
@@ -54,7 +54,7 @@ const ManageTrips = () => {
 
 	return (
 		<div className="container mx-auto my-4 max-w-screen-xl">
-			<ToastContainer />
+			<Toaster position="top-center" />
 			<div className="mb-2">
 				<input
 					type="text"
@@ -65,7 +65,7 @@ const ManageTrips = () => {
 				/>
 			</div>
 			{isLoading ? (
-				<div className="text-center text-xl m-3 text-green-600 font-extrabold">
+				<div className="text-center text-xl m-3 text-teal-600 font-extrabold">
 					Loading...
 				</div>
 			) : (
@@ -125,7 +125,7 @@ const ManageTrips = () => {
 										</td>
 										<td className="py-2 px-4 border-b flex flex-col space-y-2">
 											<Link
-												className="px-2 py-2 flex text-white bg-green-600 hover:bg-green-800 rounded"
+												className="px-2 py-2 flex text-white bg-teal-600 hover:bg-teal-800 rounded"
 												href={`/admin-trip/${trip?.id}`}
 											>
 												<button className="text-indigo-600 hover:text-indigo-900 mr-4">

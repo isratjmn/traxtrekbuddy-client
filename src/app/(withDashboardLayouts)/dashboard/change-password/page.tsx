@@ -3,34 +3,38 @@
 import TTForms from "@/component/Forms/TTForms";
 import TTInput from "@/component/Forms/TTInput";
 import { useChangePasswordMutation } from "@/redux/api/AuthApi";
-import { getUserInfo } from "@/services/auth.service";
+import { useGetMyProfileQuery } from "@/redux/api/profileApi";
+import { getUserInfo, removeUser } from "@/services/auth.service";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { FieldValues } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
+import toast, { Toaster } from "react-hot-toast";
 import { z } from "zod";
 
 const passwordValidateSchema = z.object({
 	currentPassword: z
 		.string()
-		.min(1, { message: "Current Password is required" }),
-	newPassword: z.string().min(1, { message: "New Password is required" }),
+		.min(4, { message: "Current Password is required" }),
+	newPassword: z.string().min(4, { message: "New Password is required" }),
 	confirmPassword: z
 		.string()
 		.min(1, { message: "Confirm Password is required" }),
 });
 
 const defaultValues = {
-	currentPassword: "password12",
-	newPassword: "123123",
-	confirmPassword: "123123",
+	currentPassword: "",
+	newPassword: "",
+	confirmPassword: "",
 };
 
 const ChangePassword = () => {
 	const router = useRouter();
 	const [changePassword] = useChangePasswordMutation();
+	const { refetch: refetchProfile } = useGetMyProfileQuery(undefined, {
+		skip: true,
+	});
 	const [loading, setLoading] = useState<boolean>(false);
 	const [error, setError] = useState<string>("");
 	const [user, setUser] = useState<any>(null);
@@ -50,6 +54,11 @@ const ChangePassword = () => {
 			const payload = { ...values, userId: user.id };
 			const res = await changePassword(payload).unwrap();
 			toast.success("Password changed successfully.....!");
+			// Clear access token and redirect to login
+			removeUser();
+			router.push("/login");
+			// Refetch profile data
+			await refetchProfile();
 		} catch (err: any) {
 			setError(err.data?.error || "An error occurred. Please try again.");
 			toast.error(
@@ -61,16 +70,16 @@ const ChangePassword = () => {
 	};
 	return (
 		<div className="flex items-center justify-center pt-20">
-			<ToastContainer />
+			<Toaster position="top-center" />
 			<div className="w-full shadow-xl max-w-xl p-8 border-2 border-gray-400 rounded-md text-center">
 				<div className="flex flex-col items-center justify-center">
 					<h2 className="flex font-bold text-3xl pb-4">
 						Change Password
 						<Link
 							href="/"
-							className="text-3xl pl-2 font-bold text-black hover:text-green-500 transition"
+							className="text-3xl pl-2 font-bold text-black hover:text-teal-500 transition"
 						>
-							Trek<span className="text-green-500">Trex</span>
+							Trek<span className="text-teal-500">Trex</span>
 							-Travel
 						</Link>
 					</h2>
@@ -110,7 +119,7 @@ const ChangePassword = () => {
 						</div>
 
 						<button
-							className="w-full text-lg py-2 bg-green-500 text-white rounded mt-2"
+							className="w-full text-lg py-2 bg-teal-500 text-white rounded mt-2"
 							type="submit"
 							disabled={loading}
 						>

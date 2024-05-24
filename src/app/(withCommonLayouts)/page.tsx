@@ -1,20 +1,20 @@
-import FilterForm from '@/component/Forms/FilterForm';
-import Travel from '@/component/HomePage/Travel';
-import AboutUs from '@/component/UI/HomePage/AboutUs/page';
-import HeroSection from '@/component/UI/HomePage/HeroSection/HeroSection';
+import FeaturedDestinations from "@/component/UI/HomePage/FeaturedDestination/FeaturedDestination";
 
-import React from 'react';
+import AboutUs from "@/component/UI/HomePage/AboutUs/page";
+import HeroSection from "@/component/UI/HomePage/HeroSection/HeroSection";
+
+import React from "react";
+import Travel from "@/component/UI/HomePage/TravelSection/Travel";
 
 const HomePage = () => {
-    return (
-        <div>
-            <HeroSection />
-            <FilterForm />
-            <AboutUs />
-            <Travel />
-
-        </div>
-    );
+	return (
+		<div>
+			<HeroSection />
+			<AboutUs />
+			<Travel />
+			<FeaturedDestinations />
+		</div>
+	);
 };
 
 export default HomePage;

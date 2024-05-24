@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import TTForms from "@/component/Forms/TTForms";
 import TTInput from "@/component/Forms/TTInput";
 import TTDatePicker from "@/component/Forms/TTDatePicker";
-import { ToastContainer, toast } from "react-toastify";
+import toast, { Toaster } from "react-hot-toast";
 
 type TParams = {
 	params: {
@@ -47,9 +47,9 @@ const EditTripDataByAdmin = ({ params }: TParams) => {
 
 	return (
 		<div className="w-full mt-20 item-center">
-			<ToastContainer />
+			<Toaster position="top-center" />
 			<div className="w-[100%] rounded-lg mx-auto border p-12 bg-blue-50 shadow-lg max-w-[600px]">
-				<h1 className="text-2xl text-green-500 font-bold mb-6">
+				<h1 className="text-2xl text-teal-500 font-bold mb-6">
 					Update The Trip
 				</h1>
 				<TTForms onSubmit={onSubmit} defaultValues={defaultValues}>
@@ -108,7 +108,7 @@ const EditTripDataByAdmin = ({ params }: TParams) => {
 					</div>
 
 					<button
-						className="w-[100%] text-lg py-2 bg-green-500 text-white rounded mt-2"
+						className="w-[100%] text-lg py-2 bg-teal-500 text-white rounded mt-2"
 						type="submit"
 						disabled={updating}
 					>

@@ -4,19 +4,18 @@ import { useGetMyProfileQuery } from "@/redux/api/profileApi";
 import { ApiError } from "next/dist/server/api-utils";
 import { useDeleteTripMutation } from "@/redux/api/tripApi";
 import Link from "next/link";
-
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const TravelPosts = () => {
 	const router = useRouter();
-	const { data, isLoading, error } = useGetMyProfileQuery({});
+	const { data, isLoading, error, refetch } = useGetMyProfileQuery({});
 	const [deleteTrip] = useDeleteTripMutation();
 
 	if (isLoading)
 		return (
-			<p className="text-center text-xl mt-6 text-green-600 font-extrabold">
+			<p className="text-center text-xl mt-6 text-teal-600 font-extrabold">
 				Loading...
 			</p>
 		);
@@ -34,7 +33,7 @@ const TravelPosts = () => {
 			const res = await deleteTrip(id).unwrap();
 			if (res?.id) {
 				toast.success("Trip has been deleted successfully.");
-				router.push("/my-profile");
+				refetch();
 			}
 		} catch (error) {
 			console.error("Error deleting trip:", error);
@@ -43,7 +42,7 @@ const TravelPosts = () => {
 
 	return (
 		<div className="container mx-auto px-4 py-6">
-			<h2 className="text-2xl font-bold mt-6 mb-4 text-green-600">
+			<h2 className="text-2xl font-bold mt-6 mb-8 text-teal-600">
 				My Travel Posts
 			</h2>
 			<ToastContainer />

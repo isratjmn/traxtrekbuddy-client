@@ -74,7 +74,7 @@ const DrawerDashboard = ({ children }: { children: React.ReactNode }) => {
 							</button>
 						) : (
 							<Link href="/login">
-								<button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded mt-4">
+								<button className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-8 rounded mt-4">
 									Login
 								</button>
 							</Link>

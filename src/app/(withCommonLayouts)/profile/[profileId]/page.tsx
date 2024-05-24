@@ -9,16 +9,19 @@ import { useRouter } from "next/navigation";
 import TTForms from "@/component/Forms/TTForms";
 import TTInput from "@/component/Forms/TTInput";
 import { ToastContainer, toast } from "react-toastify";
+import useUserInfo from "@/hooks/useUserInfo";
 
 type TParams = {
 	params: {
-		itemId: string;
+		userId: string;
 	};
 };
 
 const EditProfileForm = ({ params }: TParams) => {
-	const id = params?.itemId;
-	const { data: getMyProfile, refetch } = useGetMyProfileQuery(id);
+	const userId = params?.userId;
+	const userInfo = useUserInfo();
+
+	const { data: getMyProfile, refetch } = useGetMyProfileQuery(userId);
 	console.log(getMyProfile);
 
 	const [updateMyProfile, { isLoading: updating }] =
@@ -27,11 +30,16 @@ const EditProfileForm = ({ params }: TParams) => {
 
 	const onSubmit = async (values: FieldValues) => {
 		try {
-			const res = await updateMyProfile({ id, body: values }).unwrap();
+			const res = await updateMyProfile({
+				id: userId,
+				body: {
+					bio: values.bio,
+					age: parseInt(values.age, 10),
+				},
+			}).unwrap();
 			console.log(res);
-			await refetch();
+			refetch();
 			if (res?.id) {
-				console.log(res);
 				toast.success("Profile Updated Successfully!!!");
 				router.push("/my-profile");
 			}
@@ -42,8 +50,8 @@ const EditProfileForm = ({ params }: TParams) => {
 	};
 
 	const defaultValues = {
-		name: getMyProfile?.name || "",
-		email: getMyProfile?.email || "",
+		/* name: getMyProfile?.name || "",
+		email: getMyProfile?.email || "", */
 		age: getMyProfile?.userProfile?.age || "",
 		bio: getMyProfile?.userProfile?.bio || "",
 	};
@@ -52,34 +60,11 @@ const EditProfileForm = ({ params }: TParams) => {
 		<div className="w-full mt-20 item-center">
 			<ToastContainer />
 			<div className="w-[100%] rounded-lg mx-auto border p-12 bg-blue-50 shadow-lg max-w-[600px]">
-				<h1 className="text-2xl text-green-500 font-bold mb-6">
+				<h1 className="text-2xl text-teal-500 font-bold mb-6">
 					Update Your Profile
 				</h1>
-				<TTForms
-					onSubmit={onSubmit}
-					// resolver={zodResolver(passwordValidateSchema)}
-					defaultValues={defaultValues}
-				>
+				<TTForms onSubmit={onSubmit} defaultValues={defaultValues}>
 					<div className="grid grid-cols-1 pt-4 gap-4 mt-2 mb-4">
-						<div>
-							<TTInput
-								name="name"
-								label="Name"
-								type="text"
-								fullWidth={true}
-							/>
-						</div>
-						<div>
-							<TTInput
-								name="email"
-								label="Email"
-								type="email"
-								fullWidth={true}
-								disabled={true}
-							/>
-						</div>
-					</div>
-					<div className="grid grid-cols-1 pt-4 gap-4 md:grid-cols-2 mt-2 mb-4">
 						<div>
 							<TTInput
 								name="bio"
@@ -98,7 +83,7 @@ const EditProfileForm = ({ params }: TParams) => {
 						</div>
 					</div>
 					<button
-						className="w-[100%] text-lg py-2 bg-green-500 text-white rounded mt-2"
+						className="w-[100%] text-lg py-2 bg-teal-500 text-white rounded mt-2"
 						type="submit"
 						disabled={updating}
 					>

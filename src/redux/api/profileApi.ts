@@ -15,7 +15,7 @@ export const profileApi = baseApi.injectEndpoints({
 			query: (data) => ({
 				url: `/profile/${data.id}`,
 				method: "PATCH",
-				data: data?.body,
+				body: data,
 			}),
 			invalidatesTags: [tagType.user],
 		}),

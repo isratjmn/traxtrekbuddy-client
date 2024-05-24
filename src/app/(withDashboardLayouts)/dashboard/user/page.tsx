@@ -9,7 +9,7 @@ import { RxCross1 } from "react-icons/rx";
 import { MdOutlineAppRegistration } from "react-icons/md";
 import { getDashboardData } from "@/services/actions/adminManagement";
 
-const AdminDashboard = () => {
+const UserDashboard = () => {
 	const [allData, setData] = useState<any>({});
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -114,4 +114,4 @@ const AdminDashboard = () => {
 	);
 };
 
-export default AdminDashboard;
+export default UserDashboard;

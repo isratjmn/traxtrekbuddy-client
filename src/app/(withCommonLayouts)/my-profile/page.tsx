@@ -7,7 +7,7 @@ import {
 import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import Image3 from "../../../../public/assets/image-3.jpg";
+import Image3 from "@assets/image-3.jpg";
 
 import { FaUpload } from "react-icons/fa";
 import Link from "next/link";
@@ -18,12 +18,13 @@ import ProfileFileUploader from "@/component/Forms/ProfileFileUploader";
 const MyProfile = () => {
 	const router = useRouter();
 	const { data, refetch } = useGetMyProfileQuery({});
-	const myProfile = data?.myProfile || [];
+	console.log(data);
 
 	const [updateMyProfile, { isLoading: uploading }] =
 		useUpdateMyProfileMutation({});
 	const id = data?.id;
 	const [loading, setLoading] = useState(false);
+
 	const fileUploadHandler = (file: File) => {
 		const formData = new FormData();
 		formData.append("file", file);
@@ -39,13 +40,13 @@ const MyProfile = () => {
 
 	return (
 		<div className="container mx-auto px-4 py-10 ">
-			<h5 className="text-green-500 mb-4 text-3xl py-6 font-extrabold">
+			<h5 className="text-teal-500 mb-4 text-3xl py-6 font-extrabold">
 				Personal Information
 			</h5>
 			<div className="flex flex-wrap">
 				<div className="w-full md:w-[40%] mb-4 md:pr-4 ">
 					<Image
-						src={Image3}
+						src={data?.userProfile?.profileImage}
 						width={500}
 						height={500}
 						alt="brand logo"
@@ -59,16 +60,15 @@ const MyProfile = () => {
 								<ProfileFileUploader
 									name="file"
 									label="Image Upload"
-									icon={<FaUpload />}
+									icon={<FaUpload className=" mr-2" />}
 									onFileUpload={fileUploadHandler}
-									variant="text"
 								/>
 							)}
 						</div>
 
 						<div className="w-full lg:w-[92%] flex justify-center">
 							<button
-								className="w-full text-lg py-2 bg-green-500 text-white rounded mt-2 flex items-center justify-center"
+								className="w-full text-lg py-2 bg-teal-500 text-white rounded mt-2 flex items-center justify-center"
 								type="button"
 								onClick={handleClick}
 								disabled={loading}
@@ -101,7 +101,7 @@ const MyProfile = () => {
 						/>
 					</div>
 					<Link href={`/profile/${id}`}>
-						<button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded mt-4">
+						<button className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-8 rounded mt-4">
 							Edit Your Profile
 						</button>
 					</Link>

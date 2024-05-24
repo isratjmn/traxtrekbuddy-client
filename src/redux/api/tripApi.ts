@@ -7,30 +7,14 @@ export const tripsApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
 		createTrip: builder.mutation({
 			query: (data) => {
-				console.log("-----------", data);
 				return {
 					url: "/trips",
 					method: "POST",
-					// contentType: "application/json",
-					/* headers: {
-						"Content-Type": "application/json",
-					}, */
 					contentType: "multipart/form-data",
 					data,
 				};
 			},
 			invalidatesTags: [tagType.trip, tagType.user],
-		}),
-		submitTravelRequest: builder.mutation({
-			query: ({ tripId, userId }) => ({
-				url: `/trip/${tripId}/request`,
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: { userId },
-			}),
-			invalidatesTags: [tagType.trip],
 		}),
 
 		getAllTips: builder.query({
@@ -79,7 +63,6 @@ export const tripsApi = baseApi.injectEndpoints({
 
 export const {
 	useCreateTripMutation,
-	useSubmitTravelRequestMutation,
 	useGetAllTipsQuery,
 	useGetTripQuery,
 	useDeleteTripMutation,

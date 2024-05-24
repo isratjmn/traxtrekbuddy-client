@@ -1,15 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FiHome, FiUsers, FiClipboard, FiUser, FiLogOut } from "react-icons/fi";
 import Image from "next/image";
 import logo from "../../../../public/assets/logo.png";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { logoutUser } from "@/services/actions/logOutUser";
+import useUserInfo from "@/hooks/useUserInfo";
+import { getFromLocalStorage } from "@/utilities/local-stroge";
+import { jwtDecode } from "jwt-decode";
+import { decordedToken } from "@/utilities/jwtDecode";
 
 const Sidebar = () => {
+	const token = getFromLocalStorage("accessToken");
+	console.log(token);
+	const pathname = usePathname();
 	const router = useRouter();
-	const sidebarItems = [
-		{ title: "Dashboard", path: "/dashboard", icon: <FiHome /> },
+	const [user, setUser] = useState<any>({});
+
+	useEffect(() => {
+		if (token) {
+			try {
+				const userData = decordedToken(token);
+				setUser(userData);
+			} catch (error: any) {
+				router.push("/login");
+			}
+		} else {
+			router.push("/login");
+		}
+	}, [router, token]);
+
+	const adminSidebarItems = [
+		{ title: "Dashboard", path: "/dashboard/admin", icon: <FiHome /> },
 		{
 			title: "Manage Users",
 			path: "/dashboard/admin/manage-users",
@@ -21,8 +43,15 @@ const Sidebar = () => {
 			icon: <FiClipboard />,
 		},
 	];
-	const profileItems = [
-		{ title: "Profile", path: "/dashboard/profile-info", icon: <FiUser /> },
+	const userSidebarItems = [
+		{ title: "Dashboard", path: "/dashboard/user", icon: <FiHome /> },
+		{
+			title: "My Trips",
+			path: "/dashboard/user/my-trips",
+			icon: <FiClipboard />,
+		},
+	];
+	const commonItems = [
 		{
 			title: "Logout",
 			path: "/",
@@ -30,6 +59,9 @@ const Sidebar = () => {
 			onClick: () => logoutUser(router),
 		},
 	];
+
+	const sidebarItems =
+		user?.role === "admin" ? adminSidebarItems : userSidebarItems;
 
 	return (
 		<nav
@@ -43,10 +75,10 @@ const Sidebar = () => {
 				<div className="items-center gap-3">
 					<Link
 						href="/"
-						className="text-2xl font-bold text-black hover:text-green-500 transition"
+						className="text-2xl font-bold text-black hover:text-teal-500 transition"
 					>
 						Trek
-						<span className="text-green-500 font-extrabold">
+						<span className="text-teal-500 font-extrabold">
 							Trex
 						</span>
 						-Travel
@@ -58,9 +90,9 @@ const Sidebar = () => {
 					<React.Fragment key={index}>
 						<li className="flex items-center p-4 hover:bg-gray-200">
 							<span className="mr-3">{item.icon}</span>
-							<a href={item.path} className="text-gray-700">
+							<Link href={item.path} className="text-gray-700">
 								{item.title}
-							</a>
+							</Link>
 						</li>
 						{index < sidebarItems.length - 1 && (
 							<hr className="border-gray-300" />
@@ -69,15 +101,19 @@ const Sidebar = () => {
 				))}
 			</ul>
 			<ul className="mt-5 pt-5">
-				{profileItems.map((item, index) => (
+				{commonItems.map((item, index) => (
 					<React.Fragment key={index}>
 						<li className="flex items-center p-4 hover:bg-gray-200">
 							<span className="mr-3">{item.icon}</span>
-							<a href={item.path} className="text-gray-700">
+							<a
+								href={item.path}
+								onClick={item.onClick}
+								className="text-gray-700"
+							>
 								{item.title}
 							</a>
 						</li>
-						{index < profileItems.length - 1 && (
+						{index < commonItems.length - 1 && (
 							<hr className="border-gray-300" />
 						)}
 					</React.Fragment>

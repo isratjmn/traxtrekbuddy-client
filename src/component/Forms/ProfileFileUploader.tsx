@@ -6,29 +6,23 @@ type TFileUploadButton = {
 	name: string;
 	label?: string;
 	accept?: string;
-	sx?: string;
 	icon?: React.ReactElement;
-	variant?: "contained" | "text";
 	onFileUpload: (file: File) => void;
 };
 
 const ProfileFileUploader = ({
-	name,
 	label,
-	sx = "",
 	icon,
 	accept,
-	variant = "contained",
 	onFileUpload,
 }: TFileUploadButton) => {
 	return (
 		<div className={`flex items-center w-full`}>
 			<label
-				className={`relative w-full inline-flex items-center justify-center px-4 py-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 ${
-					variant === "text" ? " text-green-600" : ""
+				className={`relative w-full inline-flex items-center justify-center px-4 py-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500
 				}`}
 			>
-				{icon ? icon : <FaUpload className="h-5 w-5 mr-6 pl-7" />}
+				{icon ? icon : <FaUpload className="h-5 w-5 mr-2" />}
 				{label || "Upload file"}
 				<input
 					type="file"
