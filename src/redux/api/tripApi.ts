@@ -1,3 +1,5 @@
+
+
 import { IMeta } from "@/types/general";
 import { tagType } from "../tagTypes";
 import { baseApi } from "./baseApi";
@@ -31,6 +33,15 @@ export const doctorApi = baseApi.injectEndpoints({
 
         }),
 
+        getTrip: build.query({
+            query: (id) => ({
+                url: `/trips/${id}`,
+                method: "GET"
+
+            }),
+            providesTags: [tagType.trip]
+        }),
+
         deleteTrip: build.mutation({
             query: (id) => ({
                 url: `/trip/${id}`,
@@ -38,15 +49,6 @@ export const doctorApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: [tagType.trip],
 
-        }),
-
-        getTrip: build.query({
-            query: (id: string | string[] | undefined) => ({
-                url: `/trip/${id}`,
-                method: "GET"
-
-            }),
-            providesTags: [tagType.trip]
         }),
 
         updateTrip: build.mutation({

@@ -4,16 +4,18 @@ import TTForms from '@/component/Forms/TTForms';
 import TTInput from '@/component/Forms/TTInput';
 import { UserLogin } from '@/services/actions/UserLogin';
 import { storeUserInfo } from '@/services/auth.service';
+import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 import { toast } from 'sonner';
+import { z } from 'zod';
 
-/* export const validationSchema = z.object({
+const loginValidationSchema = z.object({
     email: z.string().email("Please enter a valid email address!"),
     password: z.string().min(6, "Must be at least 6 characters"),
-}); */
+});
 
 const LoginPage = () => {
     const router = useRouter();
@@ -27,11 +29,11 @@ const LoginPage = () => {
         {
             const res = await UserLogin(values);
             console.log(res);
-            if (res?.data?.accessToken)
+            if (res?.data?.token)
             {
-                storeUserInfo({ accessToken: res?.data?.accessToken });
+                storeUserInfo({ accessToken: res?.data?.token });
                 toast.success("Logged in successfully...!!");
-                router.push("/");
+                router.push("/dashboard");
 
             }
 
@@ -61,10 +63,10 @@ const LoginPage = () => {
                 <div>
                     <TTForms
                         onSubmit={handleLogin}
-                        // resolver={zodResolver(validationSchema)}
+                        resolver={zodResolver(loginValidationSchema)}
                         defaultValues={{
                             email: '',
-                            password: ''
+                            password: '123123'
                         }}
                     >
                         <div className="grid grid-cols-1 pt-4 gap-4 md:grid-cols-2 mt-2 mb-4">

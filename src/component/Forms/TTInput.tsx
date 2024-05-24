@@ -40,7 +40,7 @@ const TTInput = ({ name,
                         className={`p-2 border border-gray-300 rounded ${size === 'small' ? 'text-sm' : 'text-base'} ${error ? 'border-red-500' : ''}`}
                     />
                     {error && (
-                        <span className="text-red-500 text-sm mt-1">{error.message}</span>
+                        <span className="flex  justify-start text-red-500 text-sm mt-1">{error.message}</span>
                     )}
                 </div>
             )}

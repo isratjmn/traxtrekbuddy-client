@@ -1,11 +1,86 @@
 /* eslint-disable react/no-unescaped-entities */
-import logo from "../../../../public/assets/logo.png";
-import Image from "next/image";
+import Image from 'next/image';
+import { FaFacebookF, FaTwitter, FaLinkedinIn, FaMediumM, FaTelegramPlane } from 'react-icons/fa';
 import Link from "next/link";
+import logo from "@assets/logo.png";
+
 const Footer = () => {
     return (
-        <footer className="footer footer-center p-16 bg-blue-50 text-base-content rounded">
-            <div>
+        <div className="bg-gray-900 text-white px-4">
+
+            <div className="bg-blue-50 text-black font-bold py-10">
+                <div className="max-w-[1440px] px-6 lg:px-1 container mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <h2 className="text-2xl">Ready for a next project?</h2>
+                    <Link href="#" className="bg-gray-800 text-white py-2 px-4 rounded">Contact us</Link>
+                </div>
+            </div>
+            <div className="container mx-auto py-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+                <div className=" items-center gap-3 space-y-4">
+                    <Image src={logo}
+                        width={60}
+                        height={60}
+                        alt="brand logo" />
+                    <Link href="/" className="text-2xl font-bold text-white hover:text-white-500 transition">
+                        Trek<span className="text-green-500">Trex</span>-Travel
+                    </Link>
+                    <p className="text-lg mt-2 lg:mt-4 text-white-500 xl:max-w-[280px]">
+                        We want to be on each of your journeys seeking the satisfaction of seeing the incorruptible beauty of nature. We can help you on an adventure around the world in just one app.
+                    </p>
+                </div>
+                <div className="space-y-2">
+                    <h5 className="text-xl text-green-500">Customers</h5>
+                    <ul className="space-y-1">
+                        <li><Link href="#"><span className="hover:underline">Buyer</span></Link></li>
+                        <li><Link href="#"><span className="hover:underline">Supplier</span></Link></li>
+                        <li><Link href="#"><span className="hover:underline">FAQs</span></Link></li>
+                        <li><Link href="#"><span className="hover:underline">Help Center</span></Link></li>
+                        <li><Link href="#"><span className="hover:underline">Community Forum</span></Link></li>
+                        <li><Link href="#"><span className="hover:underline">Contact Support</span></Link></li>
+                    </ul>
+                </div>
+                <div className="space-y-2">
+                    <h5 className="text-xl text-green-500">Company</h5>
+                    <ul className="space-y-1">
+                        <li><Link href="#"><span className="hover:underline">About us</span></Link></li>
+                        <li><Link href="#"><span className="hover:underline">Careers</span></Link></li>
+                        <li><Link href="#"><span className="hover:underline">Contact us</span></Link></li>
+                        <li><Link href="#"><span className="hover:underline">Blog</span></Link></li>
+                        <li><Link href="#"><span className="hover:underline">Press</span></Link></li>
+                        <li><Link href="#"><span className="hover:underline">Partners</span></Link></li>
+                    </ul>
+                </div>
+                <div className="space-y-2">
+                    <h5 className="text-xl text-green-500">Further Information</h5>
+                    <ul className="space-y-1">
+                        <li><Link href="#"><span className="hover:underline">Terms & Conditions</span></Link></li>
+                        <li><Link href="#"><span className="hover:underline">Privacy Policy</span></Link></li>
+                        <li><Link href="#"><span className="hover:underline"> 123 Travel Buddy St, Wanderlust City</span></Link></li>
+                        <li><Link href="#"><span className="hover:underline">info@travelbuddy.com</span></Link></li>
+                    </ul>
+                </div>
+                <div className="space-y-2">
+                    <h5 className="text-xl text-green-500">Follow us</h5>
+                    <div className="flex space-x-4">
+                        <Link href="#"><span className="hover:text-indigo-400"><FaFacebookF /></span></Link>
+                        <Link href="#"><span className="hover:text-indigo-400"><FaTwitter /></span></Link>
+                        <Link href="#"><span className="hover:text-indigo-400"><FaLinkedinIn /></span></Link>
+                        <Link href="#"><span className="hover:text-indigo-400"><FaMediumM /></span></Link>
+                        <Link href="#"><span className="hover:text-indigo-400"><FaTelegramPlane /></span></Link>
+                    </div>
+                </div>
+                <aside>
+                    <p>Copyright©2024 - All right reserved by IZMTechz</p>
+                </aside>
+            </div>
+        </div>
+    );
+};
+
+export default Footer;
+
+
+
+{/* <div>
                 <div className="flex items-center gap-3">
                     <Image src={logo}
                         width={40}
@@ -15,7 +90,7 @@ const Footer = () => {
                         Trek<span className="text-green-500">Trex</span>-Travel
                     </Link>
                 </div>
-                <p className="w-2/3 mt-2 text-black text-lg">
+                <p className="w-2/3 mt-2 text-black text-xl">
 
                     Travel Buddy is a dynamic platform designed to connect like-minded travelers from around the world. Whether you're planning a solo adventure, seeking a travel companion, or looking to join a group tour, Travel Buddy is here to enhance your journey. Discover new destinations, share travel experiences, and make lifelong friends.
 
@@ -62,9 +137,4 @@ const Footer = () => {
             </nav>
             <aside>
                 <p>Copyright©2024 - All right reserved by IZMTechz</p>
-            </aside>
-        </footer>
-    );
-};
-
-export default Footer;
+            </aside> */}

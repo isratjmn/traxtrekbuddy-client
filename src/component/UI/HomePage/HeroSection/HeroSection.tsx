@@ -67,22 +67,3 @@ export default HeroSection;
 
 
 
-// <h2 className="text-center text-4xl text-black font-bold py-16">About Us</h2>
-
-//             <div className="flex flex-col md:flex-row justify-between items-center mb-10">
-//                 <div className="w-full md:w-1/2 mb-4 md:mb-0 md:mr-8"> {/* Added md:mr-8 for margin */}
-//                     <Image src={aboutUsImage} alt="about-us" />
-//                 </div>
-//                 <div className="w-full md:w-1/2">
-//                     <p className="text-lg mb-4">
-//                         Welcome to Travel Buddy! Our platform is designed to connect travelers looking for companionship on their trips. Whether you're an adventurer, a leisure traveler, or traveling for business, you can share your travel plans, search for trips, and find like-minded individuals to join you.
-//                     </p>
-//                     <p className="text-lg mb-4">
-//                         Our mission is to foster a community of travelers who can explore the world together, share experiences, and make travel more enjoyable and safe. With Travel Buddy, you can save time and effort in finding travel companions while also helping others in the community.
-//                     </p>
-//                     <p className="text-lg mb-4">
-//                         We believe in the power of community and the positive impact that traveling together can have. Join us in making travel a shared and enriching experience for everyone.
-//                     </p>
-
-//                 </div>
-//             </div>

@@ -1,15 +1,7 @@
 
 import Link from 'next/link';
 import TravelCard from '../UI/HomePage/TravelSection/TravelCard';
-
-
-const formatDateString = (dateString: string | number | Date) => {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-};
+import { formattedDates } from '@/utilities/formatDates';
 
 
 const Travel = async () => {
@@ -27,18 +19,19 @@ const Travel = async () => {
     const { data: trips } = await res.json();
     console.log(trips);
 
+
     return (
         <div className="container mx-auto px-4 py-32">
             <h1 className="text-4xl mx-auto font-bold mb-16">Recent Travel Posts</h1>
             <div className="flex flex-wrap -mx-4">
                 {trips.slice(0, 6).map((trip: any, index: any) => (
-                    <TravelCard key={index} trip={{ ...trip, startDate: formatDateString(trip.startDate), endDate: formatDateString(trip.endDate) }} />
+                    <TravelCard key={index} trip={{ ...trip, startDate: formattedDates(trip.startDate), endDate: formattedDates(trip.endDate) }} />
                 ))}
             </div>
             <div className="flex justify-center mt-8">
-                <Link href="/travels">
-                    <button className="bg-green-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-40 text-center">
-                        See More
+                <Link href="/trips">
+                    <button className="bg-green-400 text-white font-bold py-2 px-4 rounded w-40 text-center">
+                        View All
                     </button>
                 </Link>
             </div>

@@ -1,4 +1,4 @@
-import { USER_ROLE } from "@/constant/roles";
+import { ROLE } from "@/constant/roles";
 import { ReactNode } from "react";
 import { IconType } from "react-icons";
 
@@ -8,7 +8,7 @@ export type IMeta = {
     total: number;
 };
 
-export type Role = keyof typeof USER_ROLE;
+export type Role = keyof typeof ROLE;
 
 export interface DrawerItem {
     title: string;
@@ -18,6 +18,12 @@ export interface DrawerItem {
     child?: DrawerItem[];
 }
 
+export interface IRegister {
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+}
 
 
 export type ResponseSuccessType = {

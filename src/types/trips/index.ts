@@ -1,4 +1,5 @@
 export interface ITrip {
+    id: Key | null | undefined;
     destination: string;
     description: string;
     startDate: string;
