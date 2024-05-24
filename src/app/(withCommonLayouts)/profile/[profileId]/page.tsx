@@ -5,22 +5,29 @@ import {
 	useUpdateMyProfileMutation,
 	useGetMyProfileQuery,
 } from "@/redux/api/profileApi";
-
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import TTForms from "@/component/Forms/TTForms";
 import TTInput from "@/component/Forms/TTInput";
+import { ToastContainer, toast } from "react-toastify";
 
-const EditProfileForm = () => {
-	const { data: getMyProfile, refetch, isSuccess } = useGetMyProfileQuery({});
+type TParams = {
+	params: {
+		itemId: string;
+	};
+};
+
+const EditProfileForm = ({ params }: TParams) => {
+	const id = params?.itemId;
+	const { data: getMyProfile, refetch } = useGetMyProfileQuery(id);
 	console.log(getMyProfile);
+
 	const [updateMyProfile, { isLoading: updating }] =
 		useUpdateMyProfileMutation();
 	const router = useRouter();
 
 	const onSubmit = async (values: FieldValues) => {
 		try {
-			const res = await updateMyProfile(values).unwrap();
+			const res = await updateMyProfile({ id, body: values }).unwrap();
 			console.log(res);
 			await refetch();
 			if (res?.id) {
@@ -43,6 +50,7 @@ const EditProfileForm = () => {
 
 	return (
 		<div className="w-full mt-20 item-center">
+			<ToastContainer />
 			<div className="w-[100%] rounded-lg mx-auto border p-12 bg-blue-50 shadow-lg max-w-[600px]">
 				<h1 className="text-2xl text-green-500 font-bold mb-6">
 					Update Your Profile

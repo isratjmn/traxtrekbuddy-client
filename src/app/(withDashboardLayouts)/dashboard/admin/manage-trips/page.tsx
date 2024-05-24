@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import { useDeleteTripMutation, useGetAllTipsQuery } from "@/redux/api/tripApi";
 import { useDebounced } from "@/redux/hooks";
 import Image from "next/image";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Link from "next/link";
-const ITEMS_PER_PAGE = 10;
+import Pagination from "@/component/Forms/Pagination";
+const ITEMS_PER_PAGE = 8;
 
 const formatDate = (dateString: string | number | Date) => {
 	const date = new Date(dateString);
@@ -26,7 +27,6 @@ const ManageTrips = () => {
 		query["searchTerm"] = debouncedTerm;
 	}
 	const { data, isLoading } = useGetAllTipsQuery({ ...query });
-
 	const [deleteTrip] = useDeleteTripMutation();
 
 	const trips = data?.trips || [];
@@ -48,21 +48,14 @@ const ManageTrips = () => {
 		}
 	};
 
-	const handleNextPage = () => {
-		if (currentPage < totalPages) {
-			setCurrentPage(currentPage + 1);
-		}
-	};
-
-	const handlePreviousPage = () => {
-		if (currentPage > 1) {
-			setCurrentPage(currentPage - 1);
-		}
+	const handlePageChange = (page: number) => {
+		setCurrentPage(page);
 	};
 
 	return (
-		<div className="container mx-auto my-10 max-w-screen-xl">
-			<div className="mb-6">
+		<div className="container mx-auto my-4 max-w-screen-xl">
+			<ToastContainer />
+			<div className="mb-2">
 				<input
 					type="text"
 					placeholder="Search trips..."
@@ -81,22 +74,22 @@ const ManageTrips = () => {
 						<table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
 							<thead className="bg-blue-50">
 								<tr>
-									<th className="py-3 text-lg font-extrabold px-4 border-b text-left text-gray-700">
+									<th className="py-2 text-lg font-extrabold px-4 border-b text-left text-gray-700">
 										Image
 									</th>
-									<th className="py-3 text-lg font-extrabold px-4 border-b text-left text-gray-700">
+									<th className="py-2 text-lg font-extrabold px-4 border-b text-left text-gray-700">
 										Destination
 									</th>
-									<th className="py-3 text-lg font-extrabold px-4 border-b text-left text-gray-700">
+									<th className="py-2 text-lg font-extrabold px-4 border-b text-left text-gray-700">
 										Start Date
 									</th>
-									<th className="py-3 text-lg font-extrabold px-4 border-b text-left text-gray-700">
+									<th className="py-2 text-lg font-extrabold px-4 border-b text-left text-gray-700">
 										End Date
 									</th>
-									<th className="py-3 text-lg font-extrabold px-4 border-b text-left text-gray-700">
+									<th className="py-2 text-lg font-extrabold px-4 border-b text-left text-gray-700">
 										Travel Type
 									</th>
-									<th className="py-3 text-lg font-extrabold px-4 border-b text-left text-gray-700">
+									<th className="py-2 text-lg font-extrabold px-4 border-b text-left text-gray-700">
 										Actions
 									</th>
 								</tr>
@@ -107,7 +100,7 @@ const ManageTrips = () => {
 										key={trip?.id}
 										className="hover:bg-gray-50"
 									>
-										<td className="py-3 px-4 border-b">
+										<td className="py-2 px-4 border-b">
 											{trip.photos && (
 												<Image
 													src={trip.photos}
@@ -118,21 +111,21 @@ const ManageTrips = () => {
 												/>
 											)}
 										</td>
-										<td className="py-3 px-4 border-b">
+										<td className="py-2 px-4 border-b">
 											{trip.destination}
 										</td>
-										<td className="py-3 px-4 border-b">
+										<td className="py-2 px-4 border-b">
 											{formatDate(trip.startDate)}
 										</td>
-										<td className="py-3 px-4 border-b">
+										<td className="py-2 px-4 border-b">
 											{formatDate(trip.endDate)}
 										</td>
-										<td className="py-3 px-4 border-b">
+										<td className="py-2 px-4 border-b">
 											{trip.travelType}
 										</td>
-										<td className="py-3 px-4 border-b flex flex-col space-y-2">
+										<td className="py-2 px-4 border-b flex flex-col space-y-2">
 											<Link
-												className="px-2 py-3 flex text-white bg-green-600 hover:bg-green-800 rounded"
+												className="px-2 py-2 flex text-white bg-green-600 hover:bg-green-800 rounded"
 												href={`/admin-trip/${trip?.id}`}
 											>
 												<button className="text-indigo-600 hover:text-indigo-900 mr-4">
@@ -145,7 +138,7 @@ const ManageTrips = () => {
 												onClick={() =>
 													handleRemoveTrip(trip.id)
 												}
-												className="px-3 py-3 flex gap-2 text-white bg-red-500 hover:bg-red-600 rounded"
+												className="px-3 py-2 flex gap-2 text-white bg-red-500 hover:bg-red-600 rounded"
 											>
 												<FaTrash size={20} />
 												Delete
@@ -156,25 +149,11 @@ const ManageTrips = () => {
 							</tbody>
 						</table>
 					</div>
-					<div className="flex justify-between items-center mt-4">
-						<button
-							onClick={handlePreviousPage}
-							disabled={currentPage === 1}
-							className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-						>
-							Previous
-						</button>
-						<span className="text-gray-700">
-							Page {currentPage} of {totalPages}
-						</span>
-						<button
-							onClick={handleNextPage}
-							disabled={currentPage === totalPages}
-							className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-						>
-							Next
-						</button>
-					</div>
+					<Pagination
+						currentPage={currentPage}
+						totalPages={totalPages}
+						onPageChange={handlePageChange}
+					/>
 				</>
 			)}
 		</div>

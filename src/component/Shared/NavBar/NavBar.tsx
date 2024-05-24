@@ -62,6 +62,14 @@ const NavBar = () => {
 							</li>
 							<li>
 								<Link
+									href="/travels"
+									className="text-[16px] text-gray-700 hover:text-green-600 transition"
+								>
+									Travels
+								</Link>
+							</li>
+							<li>
+								<Link
 									href="/my-profile"
 									className="text-[16px] text-gray-700 hover:text-green-600 transition"
 								>
@@ -102,6 +110,14 @@ const NavBar = () => {
 								className="text-lg text-bold text-black font-bold hover:text-green-500 transition"
 							>
 								About Us
+							</Link>
+						</li>
+						<li>
+							<Link
+								href="/travels"
+								className="text-lg text-bold text-black font-bold hover:text-green-500 transition"
+							>
+								Travels
 							</Link>
 						</li>
 						<li>

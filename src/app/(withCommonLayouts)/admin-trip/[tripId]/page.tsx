@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import TTForms from "@/component/Forms/TTForms";
 import TTInput from "@/component/Forms/TTInput";
 import TTDatePicker from "@/component/Forms/TTDatePicker";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 type TParams = {
 	params: {
@@ -47,6 +47,7 @@ const EditTripDataByAdmin = ({ params }: TParams) => {
 
 	return (
 		<div className="w-full mt-20 item-center">
+			<ToastContainer />
 			<div className="w-[100%] rounded-lg mx-auto border p-12 bg-blue-50 shadow-lg max-w-[600px]">
 				<h1 className="text-2xl text-green-500 font-bold mb-6">
 					Update The Trip

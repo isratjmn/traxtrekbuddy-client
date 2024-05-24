@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FieldValues } from "react-hook-form";
-import { toast } from "sonner";
+import { ToastContainer, toast } from "react-toastify";
 import { z } from "zod";
 
 const loginValidationSchema = z.object({
@@ -43,6 +43,7 @@ const LoginPage = () => {
 	};
 	return (
 		<div className="flex items-center justify-center h-screen">
+			<ToastContainer />
 			<div className="w-full max-w-2xl p-8 border-2 border-gray-400 shadow-lg rounded-md text-center">
 				<div className="flex flex-col items-center justify-center">
 					<div></div>

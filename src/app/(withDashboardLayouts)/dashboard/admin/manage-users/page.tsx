@@ -5,9 +5,12 @@ import {
 	useUpdateUserInfoMutation,
 	useUpdateUserRoleMutation,
 } from "@/redux/api/userApi";
+import { useDebounced } from "@/redux/hooks";
+import React, { useEffect, useState } from "react";
+import Pagination from "@/component/Forms/Pagination";
+import { ToastContainer, toast } from "react-toastify";
 
-import React, { useEffect } from "react";
-import { toast } from "react-toastify";
+const ITEMS_PER_PAGE = 10;
 
 interface User {
 	id: string;
@@ -18,16 +21,28 @@ interface User {
 }
 
 const ManageUsers = () => {
+	const [searchTerm, setSearchTerm] = useState<string>("");
+	const [currentPage, setCurrentPage] = useState<number>(1);
+
+	const debouncedTerm = useDebounced({ searchQuery: searchTerm, delay: 600 });
+	const query: Record<string, any> = {
+		page: currentPage,
+		limit: ITEMS_PER_PAGE,
+	};
+
+	if (debouncedTerm) {
+		query["searchTerm"] = debouncedTerm;
+	}
 	const {
 		data: getAllUsers,
 		isLoading: usersLoading,
 		isError: usersError,
-	} = useGetAllUsersQuery({});
+	} = useGetAllUsersQuery(query);
+	console.log(getAllUsers);
 
-	const [updateUserRole, { isLoading: updateUserRoleLoading }] =
-		useUpdateUserRoleMutation();
-	const [updateUserInfo, { isLoading: updateUserInfoLoading }] =
-		useUpdateUserInfoMutation();
+	const [updateUserRole] = useUpdateUserRoleMutation();
+	const [updateUserInfo] = useUpdateUserInfoMutation();
+
 	useEffect(() => {
 		if (usersError) {
 			toast.error("Failed to fetch users data");
@@ -73,10 +88,20 @@ const ManageUsers = () => {
 		return <div>No users found</div>;
 	}
 
+	const totalUsers = getAllUsers?.meta?.total;
+	console.log(totalUsers);
+	const totalPages = Math.ceil(totalUsers / ITEMS_PER_PAGE);
+	console.log(totalPages);
+
+	const handlePageChange = (page: number) => {
+		setCurrentPage(page);
+	};
+
 	return (
 		<div className="w-full py-10">
-			<h1 className="text-center text-4xl font-semibold pb-8">
-				All Users
+			<ToastContainer />
+			<h1 className="text-center text-3xl font-bold text-green-600 pb-8">
+				Manage Users
 			</h1>
 			<div className="border">
 				<table className="min-w-full bg-white">
@@ -97,7 +122,7 @@ const ManageUsers = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{getAllUsers?.map((user: any) => (
+						{getAllUsers?.users?.map((user: any) => (
 							<tr key={user?.id}>
 								<td className="py-2 px-4 border-b border-gray-200">
 									{user?.name}
@@ -194,6 +219,11 @@ const ManageUsers = () => {
 					</tbody>
 				</table>
 			</div>
+			<Pagination
+				currentPage={currentPage}
+				totalPages={totalPages}
+				onPageChange={handlePageChange}
+			/>
 		</div>
 	);
 };

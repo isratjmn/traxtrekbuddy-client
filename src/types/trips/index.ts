@@ -25,6 +25,6 @@ enum Role {
 }
 
 enum UserActive {
-	Activate = "ACTIVATE",
-	Deactivate = "DEACTIVATE",
+	Activate = "ACTIVE",
+	Deactivate = "DEACTIVE",
 }

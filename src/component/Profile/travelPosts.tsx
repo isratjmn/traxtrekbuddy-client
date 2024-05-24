@@ -12,7 +12,6 @@ import "react-toastify/dist/ReactToastify.css";
 const TravelPosts = () => {
 	const router = useRouter();
 	const { data, isLoading, error } = useGetMyProfileQuery({});
-	// console.log(data);
 	const [deleteTrip] = useDeleteTripMutation();
 
 	if (isLoading)

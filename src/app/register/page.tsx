@@ -9,7 +9,7 @@ import TTInput from "@/component/Forms/TTInput";
 import { storeUserInfo } from "@/services/auth.service";
 import { UserLogin } from "@/services/actions/UserLogin";
 import { userRegister } from "@/services/actions/userRegister";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const schemaValidation = z.object({
@@ -30,7 +30,6 @@ export const defaultValues = {
 
 const RegisterPage = () => {
 	const router = useRouter();
-
 	const handleRegister = async (values: FieldValues) => {
 		try {
 			const res = await userRegister(values);
@@ -56,6 +55,7 @@ const RegisterPage = () => {
 
 	return (
 		<div className="flex items-center justify-center h-screen bg-gray-100">
+			<ToastContainer />
 			<div className="w-full max-w-2xl p-8 bg-white shadow-md rounded-md border-2 border-gray-300 text-center">
 				<div className="flex flex-col items-center mb-4">
 					<h2 className="font-bold text-2xl mt-4">

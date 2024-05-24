@@ -1,31 +1,23 @@
 import { IMeta } from "@/types/general";
 import { tagType } from "../tagTypes";
 import { baseApi } from "./baseApi";
-import { ITrip, IUsers } from "@/types/trips";
+import { IUsers } from "@/types/trips";
 
 export const userApi = baseApi.injectEndpoints({
 	endpoints: (build) => ({
-		/* getAllUsers: build.query({
+		getAllUsers: build.query({
 			query: (arg: Record<string, any>) => ({
-				url: "/all-user",
+				url: "/users",
 				method: "GET",
 				params: arg,
 			}),
 
-			transformResponse: (response: { data: IUsers[]; meta: IMeta }) => {
+			transformResponse: (response: IUsers[], meta: IMeta) => {
 				return {
-					users: response.data,
-					meta: response.meta,
+					users: response,
+					meta,
 				};
 			},
-			providesTags: [tagType.user],
-		}), */
-
-		getAllUsers: build.query({
-			query: () => ({
-				url: "/users",
-				method: "GET",
-			}),
 			providesTags: [tagType.user],
 		}),
 

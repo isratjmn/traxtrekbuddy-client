@@ -3,18 +3,25 @@ import { tagType } from "../tagTypes";
 import { baseApi } from "./baseApi";
 import { ITrip } from "@/types/trips";
 
-export const doctorApi = baseApi.injectEndpoints({
-	endpoints: (build) => ({
-		createTrip: build.mutation({
-			query: (data) => ({
-				url: "/trips",
-				method: "POST",
-				contentType: "multipart/form-data",
-				data,
-			}),
-			invalidatesTags: [tagType.trip],
+export const tripsApi = baseApi.injectEndpoints({
+	endpoints: (builder) => ({
+		createTrip: builder.mutation({
+			query: (data) => {
+				console.log("-----------", data);
+				return {
+					url: "/trips",
+					method: "POST",
+					// contentType: "application/json",
+					/* headers: {
+						"Content-Type": "application/json",
+					}, */
+					contentType: "multipart/form-data",
+					data,
+				};
+			},
+			invalidatesTags: [tagType.trip, tagType.user],
 		}),
-		submitTravelRequest: build.mutation({
+		submitTravelRequest: builder.mutation({
 			query: ({ tripId, userId }) => ({
 				url: `/trip/${tripId}/request`,
 				method: "POST",
@@ -26,7 +33,7 @@ export const doctorApi = baseApi.injectEndpoints({
 			invalidatesTags: [tagType.trip],
 		}),
 
-		getAllTips: build.query({
+		getAllTips: builder.query({
 			query: (arg: Record<string, any>) => ({
 				url: "/trips",
 				method: "GET",
@@ -41,7 +48,7 @@ export const doctorApi = baseApi.injectEndpoints({
 			providesTags: [tagType.trip],
 		}),
 
-		getTrip: build.query({
+		getTrip: builder.query({
 			query: (id: string | string[] | undefined) => ({
 				url: `/trips/${id}`,
 				method: "GET",
@@ -49,7 +56,7 @@ export const doctorApi = baseApi.injectEndpoints({
 			providesTags: [tagType.trip],
 		}),
 
-		deleteTrip: build.mutation({
+		deleteTrip: builder.mutation({
 			query: (id) => ({
 				url: `/trip/${id}`,
 				method: "DELETE",
@@ -57,7 +64,7 @@ export const doctorApi = baseApi.injectEndpoints({
 			invalidatesTags: [tagType.trip],
 		}),
 
-		updateTrip: build.mutation({
+		updateTrip: builder.mutation({
 			query: (data: { id: string; body: any }) => {
 				return {
 					url: `/trip/${data?.id}`,
@@ -77,4 +84,4 @@ export const {
 	useGetTripQuery,
 	useDeleteTripMutation,
 	useUpdateTripMutation,
-} = doctorApi;
+} = tripsApi;

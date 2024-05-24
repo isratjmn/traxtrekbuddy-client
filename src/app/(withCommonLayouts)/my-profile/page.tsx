@@ -8,7 +8,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Image3 from "../../../../public/assets/image-3.jpg";
-import FileUploader from "@/component/Forms/FileUploader";
+
 import { FaUpload } from "react-icons/fa";
 import Link from "next/link";
 import TravelPosts from "@/component/Profile/travelPosts";

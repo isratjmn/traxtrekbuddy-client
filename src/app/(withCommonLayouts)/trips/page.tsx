@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import { useGetAllTipsQuery } from "@/redux/api/tripApi";
 import { useDebounced } from "@/redux/hooks";
 import Image from "next/image";
+import Pagination from "@/component/Forms/Pagination";
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 8;
 
 const formatDate = (dateString: string | number | Date) => {
 	const date = new Date(dateString);
@@ -14,7 +15,6 @@ const formatDate = (dateString: string | number | Date) => {
 const AllTrips = () => {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [currentPage, setCurrentPage] = useState<number>(1);
-
 	const debouncedTerm = useDebounced({ searchQuery: searchTerm, delay: 600 });
 	const query: Record<string, any> = {};
 
@@ -23,7 +23,6 @@ const AllTrips = () => {
 	}
 
 	const { data, isLoading } = useGetAllTipsQuery({ ...query });
-
 	const trips = data?.trips || [];
 	const totalTrips = trips.length;
 	const totalPages = Math.ceil(totalTrips / ITEMS_PER_PAGE);
@@ -33,21 +32,13 @@ const AllTrips = () => {
 		currentPage * ITEMS_PER_PAGE
 	);
 
-	const handleNextPage = () => {
-		if (currentPage < totalPages) {
-			setCurrentPage(currentPage + 1);
-		}
-	};
-
-	const handlePreviousPage = () => {
-		if (currentPage > 1) {
-			setCurrentPage(currentPage - 1);
-		}
+	const handlePageChange = (page: number) => {
+		setCurrentPage(page);
 	};
 
 	return (
-		<div className="container mx-auto my-10 max-w-screen-xl">
-			<div className="mb-6">
+		<div className="container mx-auto mt-24 max-w-screen-xl">
+			<div className="mb-4">
 				<input
 					type="text"
 					placeholder="Search trips..."
@@ -117,25 +108,11 @@ const AllTrips = () => {
 							</tbody>
 						</table>
 					</div>
-					<div className="flex justify-between items-center mt-4">
-						<button
-							onClick={handlePreviousPage}
-							disabled={currentPage === 1}
-							className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-						>
-							Previous
-						</button>
-						<span className="text-gray-700">
-							Page {currentPage} of {totalPages}
-						</span>
-						<button
-							onClick={handleNextPage}
-							disabled={currentPage === totalPages}
-							className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-						>
-							Next
-						</button>
-					</div>
+					<Pagination
+						currentPage={currentPage}
+						totalPages={totalPages}
+						onPageChange={handlePageChange}
+					/>
 				</>
 			)}
 		</div>

@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { FieldValues } from "react-hook-form";
-import { toast } from "sonner";
+import { ToastContainer, toast } from "react-toastify";
 import { z } from "zod";
 
 const passwordValidateSchema = z.object({
@@ -34,6 +34,7 @@ const ChangePassword = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [error, setError] = useState<string>("");
 	const [user, setUser] = useState<any>(null);
+
 	useEffect(() => {
 		const userInfo = getUserInfo();
 		setUser(userInfo);
@@ -60,6 +61,7 @@ const ChangePassword = () => {
 	};
 	return (
 		<div className="flex items-center justify-center pt-20">
+			<ToastContainer />
 			<div className="w-full shadow-xl max-w-xl p-8 border-2 border-gray-400 rounded-md text-center">
 				<div className="flex flex-col items-center justify-center">
 					<h2 className="flex font-bold text-3xl pb-4">
