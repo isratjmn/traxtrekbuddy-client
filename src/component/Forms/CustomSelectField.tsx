@@ -20,7 +20,7 @@ const CustomSelectField = ({
 				disabled={disabled}
 				value={value}
 				onChange={onChange}
-				className={`block w-[50%] p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-800 ${
+				className={`block  w-[80%] lg:w-[50%] p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-800 ${
 					size === "medium" ? "text-sm" : "text-[17px]"
 				} transition-colors duration-300`}
 			>
@@ -36,3 +36,5 @@ const CustomSelectField = ({
 };
 
 export default CustomSelectField;
+
+

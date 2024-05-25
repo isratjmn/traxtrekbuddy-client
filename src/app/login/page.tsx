@@ -32,6 +32,10 @@ const LoginPage = () => {
 				toast.success("Logged in successfully...!!");
 				router.push("/");
 				router.refresh();
+			} else {
+				setError(
+					res?.message || "Something Mismatched..! Try again..!"
+				);
 			}
 		} catch (err: any) {
 			setError("An error occurred. Please try again.");
@@ -97,8 +101,8 @@ const LoginPage = () => {
 							{loading ? "Logging in..." : "Login"}
 						</button>
 						{error && (
-							<div className="bg-red-400 p-3 rounded text-white mt-2">
-								{error}
+							<div className="bg-red-400 border-red-900 p-3 rounded text-white mt-2">
+								{"Something Mismatched! Please Try again!"}
 							</div>
 						)}
 						<p className="text-black font-semibold mt-4">

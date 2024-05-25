@@ -3,27 +3,28 @@ import {
 	useGetMyProfileQuery,
 	useUpdateMyProfileMutation,
 } from "@/redux/api/profileApi";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FaUpload } from "react-icons/fa";
-import Link from "next/link";
-import TravelPosts from "@/component/Profile/travelPosts";
+
 import SubmitTravelRequest from "@/component/Profile/SubmitTravelrequest";
 import ProfileFileUploader from "@/component/Forms/ProfileFileUploader";
 import Spinner from "@/component/Shared/Spinner/Spinner";
+import Link from "next/link";
 
 const MyProfile = () => {
-	const router = useRouter();
-	const { data, refetch } = useGetMyProfileQuery({});
+	const { data: myData, refetch, isLoading } = useGetMyProfileQuery({});
 
 	const [updateMyProfile, { isLoading: uploading }] =
 		useUpdateMyProfileMutation({});
-	const id = data?.id;
-	const [loading, setLoading] = useState(false);
 	const [profileImage, setProfileImage] = useState(
-		data?.userProfile?.profileImage
+		myData?.userProfile?.profileImage
 	);
+
+	useEffect(() => {
+		refetch();
+	}, [myData, refetch]);
 
 	const fileUploadHandler = async (file: File) => {
 		const formData = new FormData();
@@ -41,23 +42,17 @@ const MyProfile = () => {
 		}
 	};
 
-	const handleClick = async () => {
-		setLoading(true);
-		await new Promise((resolve) => setTimeout(resolve, 2000));
-		router.push("https://traxtrek-client.vercel.app/change-password");
-	};
-
 	return (
 		<div className="container mx-auto px-4 py-10 ">
 			<h5 className="text-teal-500 mb-4 mt-8 text-3xl py-6 font-extrabold">
 				Personal Information
 			</h5>
 			<div className="flex flex-wrap">
-				<div className="w-full md:w-[40%] mb-4 md:pr-4 ">
+				<div className="w-full md:w-[40%] mb-4 md:pr-4 rounded-xl">
 					<Image
-						src={data?.userProfile?.profileImage}
+						src={myData?.userProfile?.profileImage}
 						width={500}
-						height={500}
+						height={300}
 						alt="ProfileImg"
 					/>
 
@@ -75,47 +70,28 @@ const MyProfile = () => {
 							)}
 						</div>
 
-						<div className="w-full lg:w-[92%] flex justify-center">
-							<button
-								className="w-full text-lg py-2 bg-teal-500 text-white rounded mt-2 flex items-center justify-center"
-								type="button"
-								onClick={handleClick}
-								disabled={loading}
-							>
-								{loading ? (
-									<svg
-										className="animate-spin h-5 w-5 mr-3 border-t-2 border-white rounded-full"
-										viewBox="0 0 24 24"
-									></svg>
-								) : (
-									"Change Password"
-								)}
-							</button>
-						</div>
-
-						<SubmitTravelRequest />
+						
 					</div>
 				</div>
 				<div className="w-full md:w-[55%]">
 					<div className="grid grid-cols-1 md:grid-cols-2  gap-4">
-						<InformationBox label="Name" value={data?.name} />
-						<InformationBox label="Email" value={data?.email} />
+						<InformationBox label="Name" value={myData?.name} />
+						<InformationBox label="Email" value={myData?.email} />
 						<InformationBox
 							label="Bio"
-							value={data?.userProfile?.bio}
+							value={myData?.userProfile?.bio}
 						/>
 						<InformationBox
 							label="Age"
-							value={data?.userProfile?.age}
+							value={myData?.userProfile?.age}
 						/>
 					</div>
-					<Link href={`/profile/${id}`}>
+					<Link href={`/profile/edit-profile`}>
 						<button className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-8 rounded mt-4">
 							Edit Your Profile
 						</button>
 					</Link>
-
-					<TravelPosts />
+					<SubmitTravelRequest />
 				</div>
 			</div>
 		</div>

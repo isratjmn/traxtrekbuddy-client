@@ -1,18 +1,31 @@
+"use client";
+import React from "react";
 import Image from "next/image";
 import star from "@assets/star.svg";
 import Button from "../../Button/Button";
 import Banner from "@assets/banner.jpg";
 import iconShare from "@assets/play.svg";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const HeroSection = () => {
 	return (
-		<section className="container mx-auto flex mt-16 flex-col space-y-10 pt-10 pb-32 lg:py-20 xl:space-y-0 xl:space-x-10 md:flex-row">
-			<div className="relative z-20 flex flex-1 flex-col md:w-1/2">
-				<h1 className="font-bold w-[80%] text-4xl lg:text-6xl z-[-3]">
+		<motion.section
+			className="container mx-auto flex mt-16 flex-col space-y-10 pt-10 pb-32 lg:py-20 xl:space-y-0 xl:space-x-10 md:flex-row"
+			initial={{ opacity: 0, y: 50 }}
+			animate={{ opacity: 1, y: 0 }}
+			transition={{ duration: 1 }}
+		>
+			<motion.div
+				className="relative z-20 flex flex-1 flex-col lg:w-1/2 justify-center align-middle lg:justify-start"
+				initial={{ opacity: 0, x: -50 }}
+				animate={{ opacity: 1, x: 0 }}
+				transition={{ duration: 1, delay: 0.5 }}
+			>
+				<h1 className="font-bold w-[80%] text-3xl lg:text-6xl z-[-3]">
 					Travel, enjoy and live a new and full life{" "}
 				</h1>
-				<p className="text-lg mt-2 lg:mt-4 text-gray-500 xl:max-w-[520px]">
+				<p className="text-base lg:text-lg mt-1 lg:mt-4 text-gray-500 xl:max-w-[520px]">
 					We want to be on each of your journeys seeking the
 					satisfaction of seeing the incorruptible beauty of nature.
 					We can help you on an adventure around the world in just one
@@ -58,9 +71,14 @@ const HeroSection = () => {
 						/>
 					</Link>
 				</div>
-			</div>
+			</motion.div>
 
-			<div className="relative flex flex-1 items-center md:w-1/2">
+			<motion.div
+				className="relative flex flex-1 items-center  lg:w-1/2"
+				initial={{ opacity: 0, x: 50 }}
+				animate={{ opacity: 1, x: 0 }}
+				transition={{ duration: 1, delay: 0.5 }}
+			>
 				<div className="relative z-20 flex rounded-2xl flex-col gap-8 bg-blue-100 px-6 py-6">
 					<Image
 						src={Banner}
@@ -74,8 +92,8 @@ const HeroSection = () => {
 						}}
 					/>
 				</div>
-			</div>
-		</section>
+			</motion.div>
+		</motion.section>
 	);
 };
 

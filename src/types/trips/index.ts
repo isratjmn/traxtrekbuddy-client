@@ -15,9 +15,17 @@ export interface IUsers {
 	name: string;
 	email: string;
 	password: string;
-	role?: Role;
-	status: UserActive;
+	confirmPassword: string;
+	role?: "user" | "admin";
+	userProfile?: {
+		bio?: string;
+		profileImage?: string;
+		age?: number;
+	};
 }
+
+
+
 
 enum Role {
 	Admin = "admin",

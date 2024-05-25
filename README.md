@@ -4,7 +4,7 @@
 
 ### Live Project Link: [text](https://traxtrek-client.vercel.app/)
 
-### Live Server-site Link: [text](https://trektrax-server.vercel.app/)
+### Live Server-site Link: [text]( https://trektrax-server.vercel.app/)
 
 ### Github Repository Link: Front-end: <https://github.com/isratjmn/traxtrekbuddy-client>
 

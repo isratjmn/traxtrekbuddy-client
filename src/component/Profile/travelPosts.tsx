@@ -4,13 +4,11 @@ import { useGetMyProfileQuery } from "@/redux/api/profileApi";
 import { ApiError } from "next/dist/server/api-utils";
 import { useDeleteTripMutation } from "@/redux/api/tripApi";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "../Shared/Spinner/Spinner";
 
 const TravelPosts = () => {
-	const router = useRouter();
 	const { data, isLoading, error, refetch } = useGetMyProfileQuery({});
 	const [deleteTrip] = useDeleteTripMutation();
 
@@ -18,10 +16,7 @@ const TravelPosts = () => {
 
 	if (error)
 		return (
-			<p>
-				{" "}
-				Error loading travel requests: {(error as ApiError)?.message}
-			</p>
+			<p>Error loading travel requests: {(error as ApiError)?.message}</p>
 		);
 	const { trips } = data;
 	const handleDeleteConfirm = async (id: string) => {
@@ -38,83 +33,73 @@ const TravelPosts = () => {
 
 	return (
 		<div className="container mx-auto px-4 py-6">
-			<h2 className="text-2xl font-bold mt-6 mb-12 text-teal-600">
+			<h2 className="text-3xl font-bold mb-8 text-teal-600">
 				My Travel Posts
 			</h2>
 			<ToastContainer />
 			<div className="overflow-x-auto">
-				<table className="min-w-full divide-y divide-gray-200">
-					<thead className="bg-gray-50">
+				<table className="min-w-[90%] bg-white border w-[80%] border-gray-300  shadow-lg">
+					<thead className="bg-teal-600 text-white rounded-2xl">
 						<tr>
-							<th
-								scope="col"
-								className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-							>
+							<th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider border-r border-gray-200">
 								SL. No
 							</th>
-							<th
-								scope="col"
-								className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-							>
+							<th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider border-r border-gray-200">
 								Destination
 							</th>
-							<th
-								scope="col"
-								className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase w-[40%] tracking-wider"
-							>
+							<th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider w-1/2 border-r border-gray-200">
 								Description
 							</th>
-							<th
-								scope="col"
-								className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-							>
+							<th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider w-1/2 border-r border-gray-200">
+								Travrl Type
+							</th>
+							<th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider border-r border-gray-200">
 								Travel Dates
 							</th>
-							<th scope="col" className="relative px-6 py-3">
-								<span className="sr-only">Edit</span>
+							<th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider border-r border-gray-200">
+								Edit
 							</th>
-							<th scope="col" className="relative px-6 py-3">
-								<span className="sr-only">Delete</span>
+							<th className="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider">
+								Delete
 							</th>
 						</tr>
 					</thead>
-					<tbody className="bg-white divide-y divide-gray-200 py-16">
+					<tbody className="divide-y divide-gray-200">
 						{trips?.map((trip: any, index: any) => (
-							<tr key={trip.id}>
-								<td className="px-6 py-4 whitespace-nowrap">
+							<tr key={trip.id} className="hover:bg-gray-100">
+								<td className="px-6 py-4 whitespace-nowrap border-r border-gray-200">
 									{index + 1}
 								</td>
-								<td className="px-6 py-4 whitespace-nowrap">
+								<td className="px-6 py-4 whitespace-nowrap border-r border-gray-200">
 									{trip.destination}
 								</td>
-								<td className="px-4 py-4 w-[40%] whitespace-nowrap max-w-xs overflow-x-auto">
+								<td className="px-6 py-4 whitespace-pre-wrap border-r border-gray-200">
 									{trip.description}
 								</td>
-								<td className="px-6 py-4 whitespace-nowrap">{`${new Date(
+								<td className="px-6 py-4 whitespace-pre-wrap border-r border-gray-200">
+									{trip.travelType}
+								</td>
+								<td className="px-6 py-4 whitespace-nowrap border-r border-gray-200">{`${new Date(
 									trip.startDate
 								).toLocaleDateString()} - ${new Date(
 									trip.endDate
 								).toLocaleDateString()}`}</td>
-								<td className="px-8 py-4 whitespace-nowrap text-right gap-3 flex">
-									<div className="bg-gray-200 py-2 px-2 rounded items-center justify-center">
-										<Link
-											href={`/travel-post/${trip?.id}`}
-										>
-											<button className="text-indigo-600 hover:text-indigo-900 mr-4">
-												<FaEdit className="text-2xl" />
-											</button>
-										</Link>
-									</div>
-									<div className="bg-gray-200 p-2 rounded items-center justify-center">
-										<button
-											className="text-red-600 hover:text-red-900"
-											onClick={() =>
-												handleDeleteConfirm(trip.id)
-											}
-										>
-											<FaTrash className="text-xl" />
+								<td className="px-6 py-4 whitespace-nowrap text-center border-r border-gray-200">
+									<Link href={`/travel-post/${trip.id}`}>
+										<button className="text-indigo-600 hover:text-indigo-900">
+											<FaEdit className="text-2xl" />
 										</button>
-									</div>
+									</Link>
+								</td>
+								<td className="px-6 py-4 whitespace-nowrap text-center">
+									<button
+										className="text-red-600 hover:text-red-900"
+										onClick={() =>
+											handleDeleteConfirm(trip.id)
+										}
+									>
+										<FaTrash className="text-2xl" />
+									</button>
 								</td>
 							</tr>
 						))}

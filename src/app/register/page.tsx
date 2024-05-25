@@ -11,9 +11,11 @@ import { UserLogin } from "@/services/actions/UserLogin";
 import { userRegister } from "@/services/actions/userRegister";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast, { Toaster } from "react-hot-toast";
+import { useState } from "react";
 
 const RegisterPage: React.FC = () => {
 	const router = useRouter();
+	const [error, setError] = useState<string>("");
 	const schemaValidation = z.object({
 		name: z.string().min(1, { message: "Name is required" }),
 		email: z.string().email({ message: "Invalid email address" }),
@@ -33,7 +35,6 @@ const RegisterPage: React.FC = () => {
 	const handleRegister = async (values: FieldValues) => {
 		try {
 			const res = await userRegister(values);
-			console.log(res);
 			if (res?.data?.id) {
 				toast.success("User created successfully");
 				const result = await UserLogin({
@@ -45,6 +46,8 @@ const RegisterPage: React.FC = () => {
 					router.push("/login");
 					router.refresh();
 				}
+			} else {
+				setError(res?.message || "Please try again!");
 			}
 		} catch (err: any) {
 			console.error(err.message);
@@ -107,6 +110,11 @@ const RegisterPage: React.FC = () => {
 					>
 						Register
 					</button>
+					{error && (
+						<div className="bg-red-400 border-red-900 p-3 rounded text-white mt-2">
+							{"Registration Failed"}
+						</div>
+					)}
 					<p className="text-gray-700 font-semibold">
 						Do you have an account?{" "}
 						<Link href="/login">

@@ -32,9 +32,7 @@ const AboutUs = () => {
 							<p className="text-lg text-gray-700">
 								With over 5 years of experience in the travel
 								industry, we offer tailored travel experiences,
-								practical tips, and a vibrant community for
-								travel enthusiasts. Join us to start your next
-								adventure!
+								practical tips.
 							</p>
 							<div className="flex w-full justify-around items-center text-center bg-white rounded-lg shadow-md p-6">
 								<div>

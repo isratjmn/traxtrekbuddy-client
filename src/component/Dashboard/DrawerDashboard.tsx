@@ -1,4 +1,4 @@
-"use client";
+
 
 import React, { useState } from "react";
 import Sidebar from "./Sidebar/Sidebar";
@@ -13,22 +13,28 @@ const DrawerDashboard = ({ children }: { children: React.ReactNode }) => {
 	const handleLogout = () => {
 		logoutUser(router);
 	};
-	const [isOpen, setIsOpen] = useState(false);
-	const toggleDrawer = () => {
-		setIsOpen(!isOpen);
+	const [isDesktopSidebarOpen, setIsDesktopSidebarOpen] = useState(false);
+	const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+	const toggleDesktopSidebar = () => {
+		setIsDesktopSidebarOpen(!isDesktopSidebarOpen);
+	};
+	const toggleMobileSidebar = () => {
+		setIsMobileSidebarOpen(!isMobileSidebarOpen);
 	};
 
 	return (
-		<div className="flex h-screen">
-			{/* Drawer Menu */}
+		<div className="flex h-screen shadow-md">
+			{/* Desktop Sidebar */}
 			<div
-				className={`bg-gray-100 w-64 border-r border-gray-200 transition duration-300 ease-in-out ${
-					isOpen ? "block" : "hidden"
-				} md:block`}
+				className={`hidden md:block bg-gray-100 w-64 border-r border-gray-200 transition duration-300 ease-in-out ${
+					isDesktopSidebarOpen ? "block" : "hidden"
+				}`}
 			>
 				<div className="p-5">
-					{/* Drawer Button */}
-					<button className="md:hidden" onClick={toggleDrawer}>
+					<button
+						className="md:hidden"
+						onClick={toggleDesktopSidebar}
+					>
 						<svg
 							className="w-8 h-8 text-gray-800 cursor-pointer"
 							fill="none"
@@ -36,7 +42,7 @@ const DrawerDashboard = ({ children }: { children: React.ReactNode }) => {
 							viewBox="0 0 24 24"
 							xmlns="http://www.w3.org/2000/svg"
 						>
-							{isOpen ? (
+							{isDesktopSidebarOpen ? (
 								<path
 									strokeLinecap="round"
 									strokeLinejoin="round"
@@ -53,7 +59,35 @@ const DrawerDashboard = ({ children }: { children: React.ReactNode }) => {
 							)}
 						</svg>
 					</button>
-					{/* Drawer Content */}
+					<div>
+						<Sidebar />
+					</div>
+				</div>
+			</div>
+
+			{/* Mobile Sidebar */}
+			<div
+				className={` fixed top-0 left-0 h-full w-full bg-gray-100 z-50 transition-transform duration-300 ease-in-out ${
+					isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full"
+				}`}
+			>
+				<div className="p-5">
+					<button className="" onClick={toggleMobileSidebar}>
+						<svg
+							className="w-8 h-8 text-gray-800 cursor-pointer"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={2}
+								d="M6 18L18 6M6 6l12 12"
+							/>
+						</svg>
+					</button>
 					<div>
 						<Sidebar />
 					</div>
@@ -64,7 +98,7 @@ const DrawerDashboard = ({ children }: { children: React.ReactNode }) => {
 			<div className="flex-1">
 				{/* Content Header */}
 				<div className="bg-gray-200 p-5">
-					<div className="flex-end flex justify-end">
+					<div className="flex justify-end">
 						{userInfo?.id ? (
 							<button
 								onClick={handleLogout}

@@ -6,7 +6,12 @@ import { formattedDates } from "@/utilities/formatDates";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-
+import {
+	FaMapMarkerAlt,
+	FaCalendarAlt,
+	FaRoute,
+	FaInfoCircle,
+} from "react-icons/fa";
 type TProps = {
 	params: {
 		tripsId: string;
@@ -85,7 +90,7 @@ const TravelDetails = ({ params }: TProps) => {
 			</div>
 
 			<div className="container mx-auto pt-20 px-4 md:px-0">
-				<div className="bg-gradient-to-r from-gray-200 to-teal-600 p-8 rounded-lg shadow-lg mb-12 w-[80%] mx-auto">
+				{/* <div className="bg-gradient-to-r from-gray-200 to-teal-600 p-8 rounded-lg shadow-lg mb-12 w-[80%] mx-auto">
 					<h2 className="text-3xl mb-4 font-extrabold text-teal-800">
 						Travel Details
 					</h2>
@@ -144,12 +149,89 @@ const TravelDetails = ({ params }: TProps) => {
 							Request to Join Trip
 						</button>
 					</div>
+				</div> */}
+
+				<div
+					className="bg-gradient-to-r from-gray-200 to-teal-600 p-8 rounded-lg 
+				shadow-lg mb-12 w-[80%] mx-auto"
+				>
+					<h2 className="text-3xl mb-4 font-extrabold text-teal-800 text-center">
+						Travel Details
+					</h2>
+					<div className="space-y-6">
+						<div className="flex items-center justify-start gap-4 md:gap-8 bg-white p-4 rounded-md shadow-md">
+							<div className="flex items-center space-x-2">
+								<FaInfoCircle className="text-teal-600" />
+								<span className="text-lg font-semibold text-teal-600">
+									Travel Type
+								</span>
+							</div>
+							<span className="text-lg text-gray-700">
+								{getTrip?.travelType}
+							</span>
+						</div>
+						<div className="flex items-center justify-start gap-4 md:gap-8 bg-white p-4 rounded-md shadow-md">
+							<div className="flex items-center space-x-2">
+								<FaCalendarAlt className="text-teal-600" />
+								<span className="text-lg font-semibold text-teal-600">
+									Start Date
+								</span>
+							</div>
+							<span className="text-lg text-gray-700">
+								{formattedDates(getTrip?.startDate)}
+							</span>
+						</div>
+						<div className="flex items-center justify-start  gap-4 md:gap-8 bg-white p-4 rounded-md shadow-md">
+							<div className="flex items-center space-x-2">
+								<FaCalendarAlt className="text-teal-600" />
+								<span className="text-lg font-semibold text-teal-600">
+									End Date
+								</span>
+							</div>
+							<span className="text-lg text-gray-700">
+								{formattedDates(getTrip?.endDate)}
+							</span>
+						</div>
+						<div className="flex items-center justify-start gap-4 md:gap-8 bg-white p-4 rounded-md shadow-md">
+							<div className="flex items-center space-x-2">
+								<FaRoute className="text-teal-600" />
+								<span className="text-lg font-semibold text-teal-600">
+									Itinerary
+								</span>
+							</div>
+							<span className="text-lg text-gray-700">
+								{getTrip?.itinerary}
+							</span>
+						</div>
+						<div className="flex items-center justify-start  gap-4 md:gap-8 bg-white p-4 rounded-md shadow-md">
+							<div className="flex items-center space-x-2">
+								<FaMapMarkerAlt className="text-teal-600" />
+								<span className="text-lg font-semibold text-teal-600">
+									Location
+								</span>
+							</div>
+							<span className="text-lg text-gray-700">
+								{getTrip?.location}
+							</span>
+						</div>
+					</div>
+					<div className="mt-8 text-center">
+						<button
+							onClick={handleBuddyReq}
+							disabled={requestCount >= 2}
+							className={`bg-teal-600 text-white font-bold py-2 px-6 rounded-lg transition-colors duration-300 ${
+								requestCount >= 2
+									? "cursor-not-allowed bg-teal-300"
+									: "hover:bg-teal-800"
+							}`}
+						>
+							Request to Join Trip
+						</button>
+					</div>
 				</div>
 
 				<div className="container mx-auto pt-20">
-					<h2 className="text-4xl mx-auto font-bold mb-2">
-						Gallery
-					</h2>
+					<h2 className="text-4xl mx-auto font-bold mb-2">Gallery</h2>
 					<p className="text-left text-lg text-gray-600 mb-10 w-[90%] lg:w-[60%] ">
 						Our mission is to make solo travel safer, more
 						enjoyable, and filled with unforgettable memories. With
