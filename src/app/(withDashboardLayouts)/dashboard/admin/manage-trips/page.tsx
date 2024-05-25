@@ -1,15 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import {
-	useDeleteTripMutation,
-	useGetAllTipsQuery,
-	useUpdateTripMutation,
-} from "@/redux/api/tripApi";
+import { useDeleteTripMutation, useGetAllTipsQuery } from "@/redux/api/tripApi";
 import { useDebounced } from "@/redux/hooks";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { FieldValues } from "react-hook-form";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Link from "next/link";
 const ITEMS_PER_PAGE = 10;
@@ -33,7 +28,6 @@ const ManageTrips = () => {
 	const { data, isLoading } = useGetAllTipsQuery({ ...query });
 
 	const [deleteTrip] = useDeleteTripMutation();
-
 
 	const trips = data?.trips || [];
 	const totalTrips = trips.length;
