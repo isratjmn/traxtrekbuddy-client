@@ -97,7 +97,9 @@ const TravelPosts = () => {
 								).toLocaleDateString()}`}</td>
 								<td className="px-8 py-4 whitespace-nowrap text-right gap-3 flex">
 									<div className="bg-gray-200 py-2 px-2 rounded items-center justify-center">
-										<Link href={`/travel-post/${trip?.id}`}>
+										<Link
+											href={`/travel-post/${trip?.id}`}
+										>
 											<button className="text-indigo-600 hover:text-indigo-900 mr-4">
 												<FaEdit className="text-2xl" />
 											</button>

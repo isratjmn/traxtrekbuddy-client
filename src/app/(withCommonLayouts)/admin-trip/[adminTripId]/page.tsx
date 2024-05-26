@@ -11,13 +11,13 @@ import toast, { Toaster } from "react-hot-toast";
 
 type TParams = {
 	params: {
-		tripId: string;
+		adminTripId: string;
 	};
 };
 
 const EditTripDataByAdmin = ({ params }: TParams) => {
 	const router = useRouter();
-	const id = params?.tripId;
+	const id = params?.adminTripId;
 	const { data: getTrip } = useGetTripQuery(id);
 	const [updateTrip, { isLoading: updating }] = useUpdateTripMutation();
 

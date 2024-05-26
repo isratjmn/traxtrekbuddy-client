@@ -9,28 +9,27 @@ import TTInput from "@/component/Forms/TTInput";
 import { storeUserInfo } from "@/services/auth.service";
 import { UserLogin } from "@/services/actions/UserLogin";
 import { userRegister } from "@/services/actions/userRegister";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast, { Toaster } from "react-hot-toast";
 
-const schemaValidation = z.object({
-	name: z.string().min(1, { message: "Name is required" }),
-	email: z.string().email({ message: "Invalid email address" }),
-	password: z.string().min(1, { message: "Password is required" }),
-	confirmPassword: z
-		.string()
-		.min(1, { message: "Confirm Password is required" }),
-});
-
-export const defaultValues = {
-	name: "",
-	email: "",
-	password: "",
-	confirmPassword: "",
-};
-
-const RegisterPage = () => {
+const RegisterPage: React.FC = () => {
 	const router = useRouter();
+	const schemaValidation = z.object({
+		name: z.string().min(1, { message: "Name is required" }),
+		email: z.string().email({ message: "Invalid email address" }),
+		password: z.string().min(1, { message: "Password is required" }),
+		confirmPassword: z
+			.string()
+			.min(1, { message: "Confirm Password is required" }),
+	});
+
+	const defaultValues = {
+		name: "",
+		email: "",
+		password: "",
+		confirmPassword: "",
+	};
+
 	const handleRegister = async (values: FieldValues) => {
 		try {
 			const res = await userRegister(values);

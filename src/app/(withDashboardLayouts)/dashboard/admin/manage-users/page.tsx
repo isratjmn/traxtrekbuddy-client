@@ -12,7 +12,6 @@ import toast, { Toaster } from "react-hot-toast";
 import Spinner from "@/component/Shared/Spinner/Spinner";
 
 const ITEMS_PER_PAGE = 10;
-
 interface User {
 	id: string;
 	name: string;
@@ -24,13 +23,11 @@ interface User {
 const ManageUsers = () => {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [currentPage, setCurrentPage] = useState<number>(1);
-
 	const debouncedTerm = useDebounced({ searchQuery: searchTerm, delay: 600 });
 	const query: Record<string, any> = {
 		page: currentPage,
 		limit: ITEMS_PER_PAGE,
 	};
-
 	if (debouncedTerm) {
 		query["searchTerm"] = debouncedTerm;
 	}
@@ -48,15 +45,12 @@ const ManageUsers = () => {
 			toast.error("Failed to fetch users data");
 		}
 	}, [usersError]);
-
 	const handleRoleChange = async (userId: string, newRole: string) => {
 		try {
 			const updatedUser = await updateUserRole({
 				id: userId,
 				body: { role: newRole },
 			});
-			console.log(updatedUser);
-
 			toast.success("User role updated successfully....");
 		} catch (error) {
 			toast.error("Failed to update user role");
@@ -81,11 +75,7 @@ const ManageUsers = () => {
 	};
 
 	if (usersLoading) {
-		return (
-			
-				<Spinner />
-			
-		);
+		return <Spinner />;
 	}
 
 	if (!getAllUsers) {
@@ -93,10 +83,7 @@ const ManageUsers = () => {
 	}
 
 	const totalUsers = getAllUsers?.meta?.total;
-	console.log(totalUsers);
 	const totalPages = Math.ceil(totalUsers / ITEMS_PER_PAGE);
-	console.log(totalPages);
-
 	const handlePageChange = (page: number) => {
 		setCurrentPage(page);
 	};
@@ -104,30 +91,38 @@ const ManageUsers = () => {
 	return (
 		<div className="w-full py-10">
 			<Toaster position="top-center" />
-			<h1 className="text-center text-3xl font-bold text-teal-600 pb-8">
+			<h1 className="text-center text-3xl font-extrabold text-teal-600 pb-8">
 				Manage Users
 			</h1>
-			<div className="border">
+			<div className="border w-[80%] mx-auto ">
 				<table className="min-w-full bg-white">
-					<thead>
+					<thead className="bg-gray-200 rounded-3xl">
 						<tr>
-							<th className="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-sm leading-4 font-medium text-gray-600 uppercase tracking-wider">
+							<th className="py-4 px-6 border-b border-gray-200 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">
+								SL No
+							</th>
+							<th className="py-4 px-6 border-b border-gray-200 text-left text-sm font-extraextrabold text-gray-600 uppercase tracking-wider">
 								Name
 							</th>
-							<th className="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-sm leading-4 font-medium text-gray-600 uppercase tracking-wider">
+							<th className="py-4 px-6 border-b border-gray-200 text-left text-sm font-extrabold text-gray-600 uppercase tracking-wider">
 								Email
 							</th>
-							<th className="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-sm leading-4 font-medium text-gray-600 uppercase tracking-wider">
+							<th className="py-4 px-6 border-b border-gray-200 text-left text-sm font-extrabold text-gray-600 uppercase tracking-wider">
 								Role
 							</th>
-							<th className="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-sm leading-4 font-medium text-gray-600 uppercase tracking-wider">
+							<th className="py-4 px-6 border-b border-gray-200 text-left text-sm font-extrabold text-gray-600 uppercase tracking-wider">
 								Status
 							</th>
 						</tr>
 					</thead>
 					<tbody>
-						{getAllUsers?.users?.map((user: any) => (
+						{getAllUsers?.users?.map((user: any, index: number) => (
 							<tr key={user?.id}>
+								<td className="py-2 px-4 border-b border-gray-200">
+									{(currentPage - 1) * ITEMS_PER_PAGE +
+										index +
+										1}
+								</td>
 								<td className="py-2 px-4 border-b border-gray-200">
 									{user?.name}
 								</td>
@@ -139,7 +134,7 @@ const ManageUsers = () => {
 										<div className="group">
 											<button
 												type="button"
-												className={`inline-flex justify-center items-center w-24 px-4 py-2 text-sm font-medium text-white ${
+												className={`inline-flex justify-center items-center w-24 px-4 py-2 text-sm font-extrabold text-white ${
 													user?.role === "admin"
 														? "bg-teal-700"
 														: "bg-gray-500"
@@ -181,7 +176,7 @@ const ManageUsers = () => {
 										<div className="group">
 											<button
 												type="button"
-												className={`inline-flex justify-center items-center w-24 px-4 py-2 text-sm font-medium text-black ${
+												className={`inline-flex justify-center items-center w-24 px-4 py-2 text-sm font-extrabold text-black ${
 													user.status === "ACTIVE"
 														? "bg-blue-300"
 														: "bg-red-500"

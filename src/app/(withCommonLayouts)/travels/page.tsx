@@ -40,9 +40,7 @@ const TravelPostForm = () => {
 			setError("User not authenticated...!");
 			return;
 		}
-
 		const data = payloadModify(values, file);
-
 		try {
 			const res = await createTrip(data).unwrap();
 			reset(defaultValues);
@@ -79,9 +77,7 @@ const TravelPostForm = () => {
 							required
 						/>
 						<TTDatePicker name="startDate" label="Start Date" />
-
 						<TTDatePicker name="endDate" label="End Date" />
-
 						<TTInput
 							name="travelType"
 							label="Travel Type"

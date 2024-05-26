@@ -56,15 +56,9 @@ const ManageTrips = () => {
 	return (
 		<div className="container mx-auto my-4 max-w-screen-xl">
 			<Toaster position="top-center" />
-			<div className="mb-2">
-				<input
-					type="text"
-					placeholder="Search trips..."
-					value={searchTerm}
-					onChange={(e) => setSearchTerm(e.target.value)}
-					className="w-full p-2 border rounded mb-4"
-				/>
-			</div>
+			<h1 className="text-center text-3xl font-bold text-teal-600 pb-8">
+				Manage Trips
+			</h1>
 			{isLoading ? (
 				<Spinner />
 			) : (

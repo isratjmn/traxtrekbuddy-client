@@ -1,24 +1,22 @@
 "use client";
 import React from "react";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues } from "react-hook-form";
 import { useGetTripQuery, useUpdateTripMutation } from "@/redux/api/tripApi";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import TTForms from "@/component/Forms/TTForms";
 import TTInput from "@/component/Forms/TTInput";
 import TTDatePicker from "@/component/Forms/TTDatePicker";
-import useUserInfo from "@/hooks/useUserInfo";
 
 type TParams = {
 	params: {
-		itemId: string;
+		travelPostId: string;
 	};
 };
 
 const EditTripForm = ({ params }: TParams) => {
 	const router = useRouter();
-	const userInfo = useUserInfo();
-	const id = params?.itemId;
+	const id = params?.travelPostId;
 	const {
 		data: getTrip,
 		error: errorTips,
@@ -30,7 +28,7 @@ const EditTripForm = ({ params }: TParams) => {
 		try {
 			const res = await updateTrip({ id, body: values }).unwrap();
 			if (res?.id) {
-				toast.success("Profile Updated Successfully!!!");
+				toast.success("Profile Updated Successfully....!!");
 				refetchTrip();
 				router.push("/my-profile");
 			}
@@ -52,11 +50,7 @@ const EditTripForm = ({ params }: TParams) => {
 				<h1 className="text-2xl text-teal-500 font-bold mb-6">
 					Update Your Trip
 				</h1>
-				<TTForms
-					onSubmit={onSubmit}
-					// resolver={zodResolver(passwordValidateSchema)}
-					defaultValues={defaultValues}
-				>
+				<TTForms onSubmit={onSubmit} defaultValues={defaultValues}>
 					<div className="grid grid-cols-1 pt-4 gap-4 mt-2 mb-4">
 						<div className="flex">
 							<div className="mr-2 w-1/2">
