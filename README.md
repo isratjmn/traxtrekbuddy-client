@@ -1,4 +1,14 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TrekTrax TravelBuddy Client
+
+#### The Travel Buddy Matching assignment is aimed at building a web application that facilitates users in finding travel buddies for their trips. The application provides features for user registration, trip creation, travel buddy requests, and user profiles
+
+#### Users can register, create trips with details like destination, dates, budget, and activities, and send/receive travel buddy requests for their trips. Additionally, users can update their profile information
+
+### Live Project Link: [text](https://traxtrek-client.vercel.app/)
+
+### Github Repository Link: Front-end: < ttps://github.com/isratjmn/traxtrekbuddy-client>
+
+### Video Presentation Link: [text](https://drive.google.com/file/d/10CP9Zs_Y1javfHWKlurqxzh6J93Lk0Dz/view?usp=sharing)
 
 ## Getting Started
 
@@ -14,7 +24,7 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](https://traxtrek-client.vercel.app/) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
