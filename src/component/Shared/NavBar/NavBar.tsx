@@ -1,11 +1,25 @@
+"use client";
+
 import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
 import { FaUserAlt, FaHome, FaInfoCircle, FaEnvelope } from 'react-icons/fa';
 import logo from "@assets/logo.png";
+import { useRouter } from 'next/navigation';
+import useUserInfo from '@/hooks/useUserInfo';
+import { logoutUser } from '@/services/actions/logOutUser';
+
 
 
 const NavBar = () => {
+    const userInfo = useUserInfo();
+
+    const router = useRouter();
+
+    const handleLogout = () => {
+        logoutUser(router);
+        console.log("haNdle");
+    };
     return (
         <div className="navbar bg-base-100 px-6">
             <div className="navbar-start">
@@ -48,10 +62,26 @@ const NavBar = () => {
                     </li>
                 </ul>
             </div>
+
             <div className="navbar-end">
-                <Link className="btn" href="/login">Login</Link>
+                {userInfo?.id ? (
+                    <button
+                        onClick={handleLogout}
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-8 rounded mt-4"
+                    >
+                        Logout
+                    </button>
+                ) : (
+                    <Link href="/login">
+                        <button
+                            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded mt-4"
+                        >
+                            Login
+                        </button>
+                    </Link>
+                )}
             </div>
-        </div>
+        </div >
     );
 };
 

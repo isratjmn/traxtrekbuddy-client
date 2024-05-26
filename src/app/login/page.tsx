@@ -20,7 +20,6 @@ const loginValidationSchema = z.object({
 const LoginPage = () => {
     const router = useRouter();
     const [loading, setLoading] = useState<boolean>(false);
-
     const [error, setError] = useState<string>("");
 
     const handleLogin = async (values: FieldValues) => {
@@ -28,12 +27,12 @@ const LoginPage = () => {
         try
         {
             const res = await UserLogin(values);
-            console.log(res);
+
             if (res?.data?.token)
             {
                 storeUserInfo({ accessToken: res?.data?.token });
                 toast.success("Logged in successfully...!!");
-                router.push("/dashboard");
+                router.push("/");
 
             }
 
@@ -82,7 +81,7 @@ const LoginPage = () => {
                                 <TTInput
                                     name="password"
                                     label="Password"
-                                    type="password"
+                                    type="text"
                                     fullWidth={true}
                                 />
                             </div>
@@ -105,6 +104,8 @@ const LoginPage = () => {
                             <Link href="/register">
                                 <strong className="text-green-500">Create an account</strong>
                             </Link>
+
+                            
                         </p>
                     </TTForms>
                 </div>

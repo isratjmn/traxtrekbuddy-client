@@ -11,8 +11,3 @@ export const decordedToken = (token: string) => {
         return null;
     }
 };
-
-/* export const decordedToken = (token: string) => {
-    return jwtDecode(token);
-};
- */

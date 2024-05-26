@@ -2,7 +2,7 @@ export enum tagType {
     trip = "trip",
     admin = "admin",
     userProfile = "userProfile",
-    user = "user"
+    user = "user",
     meta = "meta"
 }
 
