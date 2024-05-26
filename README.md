@@ -2,15 +2,15 @@
 
 #### The Travel Buddy Matching Application is a platform designed to connect travelers with compatible travel buddies based on their preferences, interests, and travel plans. Users can create profiles, search for potential travel partners, and plan trips together, fostering a community of like-minded adventurers.
 
-### Live Project Link: [text](https://traxtrek-client.vercel.app/)
+### Live Project Link: [Live Link](https://traxtrek-client.vercel.app/)
 
-### Live Server-site Link: [text]( https://trektrax-server.vercel.app/)
+### Live Server-site Link: [Server Link]( https://trektrax-server.vercel.app/)
 
 ### Github Repository Link: Front-end: <https://github.com/isratjmn/traxtrekbuddy-client>
 
-### Github Repository Link: Back-end: <https://github.com/isratjmn/traxtrekbuddy-client>
+### Github Repository Link: Back-end: <https://github.com/isratjmn/traxtrekbuddy-server>
 
-### Video Presentation Link: [text](https://drive.google.com/file/d/10CP9Zs_Y1javfHWKlurqxzh6J93Lk0Dz/view?usp=sharing)
+### Video Presentation Link: [Presentation](https://drive.google.com/file/d/10CP9Zs_Y1javfHWKlurqxzh6J93Lk0Dz/view?usp=sharing)
 
 ### Table of Contents
 
