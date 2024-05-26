@@ -9,6 +9,10 @@ import FileUploader from '@/component/Forms/FileUploader';
 import { FaUpload } from 'react-icons/fa';
 import Link from 'next/link';
 
+import TravelPosts from '@/component/Profile/travelPosts';
+import TravelRequestHistory from '../travel-buddies/[tripId]/page';
+
+
 const MyProfile = () => {
   const router = useRouter();
   const { data, isLoading } = useGetMyProfileQuery({});
@@ -28,7 +32,6 @@ const MyProfile = () => {
 
   const handleClick = async () => {
     setLoading(true);
-    // Simulate a network request or any async action
     await new Promise((resolve) => setTimeout(resolve, 2000));
     router.push('http://localhost:3000/dashboard/change-password');
   };
@@ -52,20 +55,13 @@ const MyProfile = () => {
                   icon={<FaUpload />}
                   onFileUpload={fileUploadHandler}
                   variant="text"
-                  className="text-center md:w-1/2 py-3 bg-green-500  text-center rounded"
+                  className="text-center md:w-1/2 py-3 bg-green-500  rounded"
                 />
               )}
             </div>
-            {/* <Link className="sm:w-[100%] lg:w-[92%]  md:px-10 bg-green-500 text-white rounded mt-2 md:mt-0" href="http://localhost:3000/dashboard/change-password">
-      <button
-        className="sm:w-[100%] lg:w-[92%] text-sm lg:text-lg md:px-12 py-3 bg-green-500 text-white rounded mt-2 md:mt-0"
-        type="submit"
-      >
-        Change Password
-      </button>
-    </Link> */}
 
-            <div className="w-full flex justify-center">
+
+            <div className="w-full lg:w-[92%] flex justify-center">
               <button
                 className="w-full text-lg py-2 bg-green-500 text-white rounded mt-2 flex items-center justify-center"
                 type="button"
@@ -86,11 +82,11 @@ const MyProfile = () => {
 
         </div>
         <div className="w-full md:w-[55%]">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <InformationBox label="Name" value={data?.name} />
             <InformationBox label="Email" value={data?.email} />
-            <InformationBox label="Bio" value={data?.userProfile?.bio} />
-            <InformationBox label="Age" value={data?.userProfile?.age} />
+            {/* <InformationBox label="Bio" value={data?.userProfile?.bio} />
+            <InformationBox label="Age" value={data?.userProfile?.age} /> */}
           </div>
           <Link href={`/profile/${id}`}>
             <button
@@ -99,6 +95,9 @@ const MyProfile = () => {
               Edit Your Profile
             </button>
           </Link>
+          <TravelRequestHistory params={{ tripId: id }} />
+          <TravelPosts tripId={id} />
+
         </div>
       </div>
     </div>

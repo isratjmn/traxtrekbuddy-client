@@ -2,7 +2,6 @@
 import { tagType } from "../tagTypes";
 import { baseApi } from "./baseApi";
 
-
 export const profileApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         getMyProfile: build.query({
@@ -15,7 +14,7 @@ export const profileApi = baseApi.injectEndpoints({
         updateMyProfile: build.mutation({
             query: (data) => ({
                 method: "PUT",
-                url: "/my-profile",
+                url: "/profile",
                 data,
             }),
             invalidatesTags: [tagType.user],

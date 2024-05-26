@@ -16,6 +16,15 @@ export const doctorApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: [tagType.trip],
         }),
+        tripRequestUser: build.mutation({
+            query: (data) => ({
+                url: '/trip/${tripId}/request',
+                method: 'POST',
+                contentType: 'multipart/form-data',
+                data,
+            }),
+            invalidatesTags: [tagType.trip],
+        }),
 
         getAllTips: build.query({
             query: (arg: Record<string, any>) => ({
@@ -34,8 +43,8 @@ export const doctorApi = baseApi.injectEndpoints({
         }),
 
         getTrip: build.query({
-            query: (id) => ({
-                url: `/trips/${id}`,
+            query: (tripId) => ({
+                url: `/trips/${tripId}`,
                 method: "GET"
 
             }),

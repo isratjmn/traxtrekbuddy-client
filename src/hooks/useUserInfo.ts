@@ -21,7 +21,7 @@ const useUserInfo = (): any | string => {
                 };
                 const userInfo: any = {
                     ...decodedData,
-                    role: decodedData.role?.toLowerCase() || '',
+                    role: decodedData?.role?.toLowerCase() || '',
                 };
                 setUserInfo(userInfo);
             } else

@@ -1,5 +1,7 @@
+import { Key } from "react";
+
 export interface ITrip {
-    id: Key | null | undefined;
+    id: string;
     destination: string;
     description: string;
     startDate: string;
