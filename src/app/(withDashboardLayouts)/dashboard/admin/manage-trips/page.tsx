@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Link from "next/link";
 import Pagination from "@/component/Forms/Pagination";
+import Spinner from "@/component/Shared/Spinner/Spinner";
 const ITEMS_PER_PAGE = 8;
 
 const formatDate = (dateString: string | number | Date) => {
@@ -65,9 +66,7 @@ const ManageTrips = () => {
 				/>
 			</div>
 			{isLoading ? (
-				<div className="text-center text-xl m-3 text-teal-600 font-extrabold">
-					Loading...
-				</div>
+				<Spinner />
 			) : (
 				<>
 					<div className="overflow-x-auto">

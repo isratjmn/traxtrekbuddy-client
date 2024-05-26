@@ -8,8 +8,11 @@ import { FaCodePullRequest } from "react-icons/fa6";
 import { RxCross1 } from "react-icons/rx";
 import { MdOutlineAppRegistration } from "react-icons/md";
 import { getDashboardData } from "@/services/actions/adminManagement";
+import Spinner from "@/component/Shared/Spinner/Spinner";
+import useUserInfo from "@/hooks/useUserInfo";
 
 const AdminDashboard = () => {
+	const userInfo = useUserInfo();
 	const [allData, setData] = useState<any>({});
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -18,7 +21,6 @@ const AdminDashboard = () => {
 			setIsLoading(true);
 			try {
 				const data = await getDashboardData();
-				console.log(data?.data);
 				setData(data);
 				setIsLoading(false);
 			} catch (error) {
@@ -29,7 +31,7 @@ const AdminDashboard = () => {
 	}, []);
 
 	if (isLoading) {
-		return <p className="text-center">Loading...</p>;
+		return <Spinner />;
 	}
 
 	const stats = [
@@ -75,21 +77,19 @@ const AdminDashboard = () => {
 				<MdOutlineAppRegistration className="text-[90px] group-hover:text-primaryColor transition-colors duration-300" />
 			),
 		},
-		{
-			label: "Total Trip Request Rejected",
-			value: allData?.totalTripRequestRejected,
-			icon: (
-				<RxCross1 className="text-[90px] group-hover:text-primaryColor transition-colors duration-300" />
-			),
-		},
 	];
 
 	return (
-		<div className="w-full">
-			<h1 className="text-3xl pb-10 font-semibold text-center pt-4 md:pt-8">
-				Dashboard Home
+		<div className="w-full mx-auto">
+			<h1 className="text-3xl pb-10 font-bold capitalize mx-auto text-center pt-4 md:pt-8">
+				<span className="text-teal-600 capitalize font mr-4">
+					{userInfo?.role?.charAt(0).toUpperCase() +
+						userInfo?.role?.slice(1)}
+				</span>
+				Dashboard
 			</h1>
-			<div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+			<div className="grid grid-cols-2 md:grid-cols-3 mx-auto gap-4">
 				{stats.map((stat, index) => (
 					<div
 						key={index}

@@ -5,7 +5,7 @@ import { axiosBaseQuery } from '@/helpers/axios/axiosBaseQuery';
 
 export const baseApi = createApi({
     reducerPath: 'api',
-    baseQuery: axiosBaseQuery({ baseUrl: 'https://trektrax-server.vercel.app/api' }),
+    baseQuery: axiosBaseQuery({ baseUrl: 'http://localhost:5000/api' }),
     endpoints: () => ({}),
     tagTypes: tagTypesList
 });

@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { FiHome, FiUsers, FiClipboard, FiUser, FiLogOut } from "react-icons/fi";
+import { FiHome, FiUsers, FiClipboard, FiLogOut } from "react-icons/fi";
 import Image from "next/image";
 import logo from "../../../../public/assets/logo.png";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { logoutUser } from "@/services/actions/logOutUser";
-import useUserInfo from "@/hooks/useUserInfo";
+
 import { getFromLocalStorage } from "@/utilities/local-stroge";
-import { jwtDecode } from "jwt-decode";
+
 import { decordedToken } from "@/utilities/jwtDecode";
+import { TbPasswordFingerprint } from "react-icons/tb";
 
 const Sidebar = () => {
 	const token = getFromLocalStorage("accessToken");
-	console.log(token);
 	const pathname = usePathname();
 	const router = useRouter();
 	const [user, setUser] = useState<any>({});
@@ -52,6 +52,12 @@ const Sidebar = () => {
 		},
 	];
 	const commonItems = [
+/* 		{
+			title: "Change Password",
+			path: "/change-password",
+			icon: <TbPasswordFingerprint />,
+			onClick: () => logoutUser(router),
+		}, */
 		{
 			title: "Logout",
 			path: "/",

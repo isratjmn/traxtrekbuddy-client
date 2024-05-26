@@ -13,15 +13,16 @@ const TravelCard = ({ trip }: { trip: any }) => {
 			animate={{ scale: 1, opacity: 1 }}
 			transition={{ duration: 0.5 }}
 		>
-			<div className="bg-white rounded overflow-hidden shadow-lg flex flex-col justify-between w-full">
-				{trip.photos && (
-					<Image
-						className="w-full"
-						src={trip.photos}
-						alt={trip?.destination}
-						width={400}
-						height={300}
-					/>
+			<div className="bg-white overflow-hidden rounded-lg shadow-lg flex flex-col justify-between w-full">
+				{trip?.photos && (
+					<div className="relative w-full h-56">
+						<Image
+							className="object-cover"
+							src={trip.photos}
+							alt={trip?.destination}
+							layout="fill"
+						/>
+					</div>
 				)}
 
 				<div className="px-4 font-bold text-xl mt-4">

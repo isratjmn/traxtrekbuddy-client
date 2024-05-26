@@ -19,7 +19,6 @@ const EditTripDataByAdmin = ({ params }: TParams) => {
 	const router = useRouter();
 	const id = params?.tripId;
 	const { data: getTrip } = useGetTripQuery(id);
-	console.log(getTrip);
 	const [updateTrip, { isLoading: updating }] = useUpdateTripMutation();
 
 	const onSubmit = async (values: FieldValues) => {
@@ -27,7 +26,7 @@ const EditTripDataByAdmin = ({ params }: TParams) => {
 			const res = await updateTrip({ id, body: values }).unwrap();
 			console.log(res);
 			if (res?.id) {
-				console.log(res);
+
 				toast.success("Travel Updated Successfully By Admin...!!");
 				router.push("/dashboard/admin/manage-trips");
 			}

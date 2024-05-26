@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-// pages/about-us.tsx
+
 import Image from "next/image";
 import traveler1 from "@assets/2149119434.jpg";
 import traveler2 from "@assets/2149137146.jpg";
@@ -36,7 +36,7 @@ const teamInfo = [
 
 const AboutUsPage = () => {
 	return (
-		<div className=" mx-auto relative max-w-[1440px] object-cover bg-center bg-no-repeat">
+		<div className=" mx-auto relative max-w-[1440px] mb-16 object-cover bg-center bg-no-repeat">
 			<div className="relative w-full h-screen container-lg">
 				<Image
 					src={bannerImage}
@@ -56,7 +56,7 @@ const AboutUsPage = () => {
 				</div>
 			</div>
 
-			<h2 className="text-center text-3xl text-gray-800 mt-40 font-extrabold">
+			<h2 className="text-center text-3xl text-gray-800 mt-32 font-extrabold">
 				Travel Team
 			</h2>
 			<p className="text-center text-lg text-gray-600 mt-4 max-w-2xl mb-14 mx-auto">
@@ -65,17 +65,19 @@ const AboutUsPage = () => {
 				and enjoyable.
 			</p>
 
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1440px] mx-auto mt-8">
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1440px] mx-auto mt-8">
 				{teamInfo.map((item, index) => (
 					<div
 						key={index}
-						className="rounded-lg p-8 m-2 flex flex-col items-center gap-4 shadow-lg transition-all duration-500 hover:shadow-2xl bg-white"
+						className="rounded-lg p-8 m-2 flex flex-col items-center gap-4 shadow-xl transition-all duration-500 hover:shadow-2xl bg-white"
 					>
-						<div className="w-60 h-44 mx-auto">
+						<div className="mx-auto">
 							<Image
 								src={item.image}
 								alt={item.name}
 								className="rounded-lg"
+								width={300}
+								height={400}
 							/>
 						</div>
 						<div className="text-gray-800 font-bold text-xl">

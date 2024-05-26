@@ -52,7 +52,7 @@ const ChangePassword = () => {
 		setLoading(true);
 		try {
 			const payload = { ...values, userId: user.id };
-			const res = await changePassword(payload).unwrap();
+			await changePassword(payload).unwrap();
 			toast.success("Password changed successfully.....!");
 			// Clear access token and redirect to login
 			removeUser();

@@ -8,6 +8,7 @@ import { FaCodePullRequest } from "react-icons/fa6";
 import { RxCross1 } from "react-icons/rx";
 import { MdOutlineAppRegistration } from "react-icons/md";
 import { getDashboardData } from "@/services/actions/adminManagement";
+import Spinner from "@/component/Shared/Spinner/Spinner";
 
 const UserDashboard = () => {
 	const [allData, setData] = useState<any>({});
@@ -29,7 +30,7 @@ const UserDashboard = () => {
 	}, []);
 
 	if (isLoading) {
-		return <p className="text-center">Loading...</p>;
+		return <Spinner />;
 	}
 
 	const stats = [
@@ -75,13 +76,7 @@ const UserDashboard = () => {
 				<MdOutlineAppRegistration className="text-[90px] group-hover:text-primaryColor transition-colors duration-300" />
 			),
 		},
-		{
-			label: "Total Trip Request Rejected",
-			value: allData?.totalTripRequestRejected,
-			icon: (
-				<RxCross1 className="text-[90px] group-hover:text-primaryColor transition-colors duration-300" />
-			),
-		},
+		
 	];
 
 	return (

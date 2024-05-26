@@ -1,9 +1,6 @@
 import { authenKeys } from "@/constant/authenKeys";
 import { IGenericErrorResponse, ResponseSuccessType } from "@/types/general";
-import {
-	getFromLocalStorage,
-	setToLocalStorage,
-} from "@/utilities/local-stroge";
+import { getFromLocalStorage } from "@/utilities/local-stroge";
 import axios from "axios";
 
 const instance = axios.create();

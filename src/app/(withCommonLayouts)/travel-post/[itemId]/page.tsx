@@ -3,7 +3,7 @@ import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useGetTripQuery, useUpdateTripMutation } from "@/redux/api/tripApi";
 import { useRouter } from "next/navigation";
-import { ToastContainer, toast } from "react-toastify";
+import toast, { Toaster } from "react-hot-toast";
 import TTForms from "@/component/Forms/TTForms";
 import TTInput from "@/component/Forms/TTInput";
 import TTDatePicker from "@/component/Forms/TTDatePicker";
@@ -47,7 +47,7 @@ const EditTripForm = ({ params }: TParams) => {
 
 	return (
 		<div className="w-full mt-20 item-center">
-			<ToastContainer />
+			<Toaster position="top-center" />
 			<div className="w-[100%] rounded-lg mx-auto border p-12 bg-blue-50 shadow-lg max-w-[600px]">
 				<h1 className="text-2xl text-teal-500 font-bold mb-6">
 					Update Your Trip

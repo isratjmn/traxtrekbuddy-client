@@ -4,7 +4,7 @@ import aboutUsImage from "../../../../../public/assets/about-us.jpg";
 const AboutUs = () => {
 	return (
 		<div className="container mx-auto max-w-[1440px] mt-16">
-			<div className="bg-blue-50 flex flex-col items-center py-12 px-4 sm:px-6 lg:px-4">
+			<div className="bg-blue-50 rounded-lg flex flex-col items-center py-12 px-4 sm:px-6 lg:px-4">
 				<div className="max-w-7xl w-full space-y-8">
 					<div className="text-center">
 						<h2 className="text-4xl py-6 font-extrabold text-gray-900">

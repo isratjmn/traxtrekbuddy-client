@@ -7,18 +7,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Spinner from "../Shared/Spinner/Spinner";
 
 const TravelPosts = () => {
 	const router = useRouter();
 	const { data, isLoading, error, refetch } = useGetMyProfileQuery({});
 	const [deleteTrip] = useDeleteTripMutation();
 
-	if (isLoading)
-		return (
-			<p className="text-center text-xl mt-6 text-teal-600 font-extrabold">
-				Loading...
-			</p>
-		);
+	if (isLoading) return <Spinner />;
 
 	if (error)
 		return (
@@ -42,7 +38,7 @@ const TravelPosts = () => {
 
 	return (
 		<div className="container mx-auto px-4 py-6">
-			<h2 className="text-2xl font-bold mt-6 mb-8 text-teal-600">
+			<h2 className="text-2xl font-bold mt-6 mb-12 text-teal-600">
 				My Travel Posts
 			</h2>
 			<ToastContainer />

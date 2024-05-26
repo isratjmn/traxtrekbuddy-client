@@ -1,0 +1,12 @@
+.react-confirm-alert-overlay {
+	background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.react-confirm-alert-body {
+	background-color: white !important;
+}
+
+.react-confirm-alert-button-group {
+	display: flex;
+	justify-content: center;
+}

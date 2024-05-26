@@ -3,6 +3,7 @@ import star from "@assets/star.svg";
 import Button from "../../Button/Button";
 import Banner from "@assets/banner.jpg";
 import iconShare from "@assets/play.svg";
+import Link from "next/link";
 
 const HeroSection = () => {
 	return (
@@ -41,18 +42,21 @@ const HeroSection = () => {
 				</div>
 
 				<div className="flex flex-row w-[40%] gap-3">
-					<Button
-						type="button"
-						title="Share Your Trip"
-						variant="btn_teal"
-					/>
-
-					<Button
-						type="button"
-						title="How we work?"
-						icon={iconShare}
-						variant="btn_white_text"
-					/>
+					<Link href="/travels">
+						<Button
+							type="button"
+							title="Share Your Trip"
+							variant="btn_teal"
+						/>
+					</Link>
+					<Link href="#">
+						<Button
+							type="button"
+							title="How we work?"
+							icon={iconShare}
+							variant="btn_white_text"
+						/>
+					</Link>
 				</div>
 			</div>
 
@@ -71,7 +75,6 @@ const HeroSection = () => {
 					/>
 				</div>
 			</div>
-			
 		</section>
 	);
 };

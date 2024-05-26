@@ -9,6 +9,7 @@ import { useDebounced } from "@/redux/hooks";
 import React, { useEffect, useState } from "react";
 import Pagination from "@/component/Forms/Pagination";
 import toast, { Toaster } from "react-hot-toast";
+import Spinner from "@/component/Shared/Spinner/Spinner";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -38,7 +39,6 @@ const ManageUsers = () => {
 		isLoading: usersLoading,
 		isError: usersError,
 	} = useGetAllUsersQuery(query);
-	console.log(getAllUsers);
 
 	const [updateUserRole] = useUpdateUserRoleMutation();
 	const [updateUserInfo] = useUpdateUserInfoMutation();
@@ -81,7 +81,11 @@ const ManageUsers = () => {
 	};
 
 	if (usersLoading) {
-		return <div>Loading...</div>;
+		return (
+			
+				<Spinner />
+			
+		);
 	}
 
 	if (!getAllUsers) {

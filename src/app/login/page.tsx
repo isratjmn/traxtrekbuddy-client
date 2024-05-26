@@ -9,9 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FieldValues } from "react-hook-form";
-// import { ToastContainer, toast } from "react-toastify";
 import { z } from "zod";
-
 import toast, { Toaster } from "react-hot-toast";
 
 const loginValidationSchema = z.object({
@@ -26,6 +24,7 @@ const LoginPage = () => {
 
 	const handleLogin = async (values: FieldValues) => {
 		setLoading(true);
+		setError("");
 		try {
 			const res = await UserLogin(values);
 			if (res?.data?.token) {
@@ -37,7 +36,9 @@ const LoginPage = () => {
 		} catch (err: any) {
 			setError("An error occurred. Please try again.");
 			toast.error("An error occurred. Please try again.");
-			console.error(err?.message);
+			console.error(
+				err?.message || "An error occurred. Please try again."
+			);
 		}
 		setLoading(false);
 	};
@@ -48,10 +49,7 @@ const LoginPage = () => {
 			<div className="w-full max-w-2xl p-8 border-2 border-gray-400 shadow-lg rounded-md text-center">
 				<div className="flex flex-col items-center justify-center">
 					<div></div>
-					<h2
-						className="font-bold text-3xl
-                    pb-4"
-					>
+					<h2 className="font-bold text-3xl pb-4">
 						Login
 						<Link
 							href="/"
@@ -63,14 +61,13 @@ const LoginPage = () => {
 						l
 					</h2>
 				</div>
-
 				<div>
 					<TTForms
 						onSubmit={handleLogin}
 						resolver={zodResolver(loginValidationSchema)}
 						defaultValues={{
 							email: "",
-							password: "123123",
+							password: "",
 						}}
 					>
 						<div className="grid grid-cols-1 pt-4 gap-4 md:grid-cols-2 mt-2 mb-4">

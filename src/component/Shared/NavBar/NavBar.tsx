@@ -4,17 +4,24 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import logo from "@assets/logo.png";
-import { useRouter } from "next/navigation";
-import useUserInfo from "@/hooks/useUserInfo";
-import { logoutUser } from "@/services/actions/logOutUser";
+import dynamic from "next/dynamic";
+import Spinner from "../Spinner/Spinner";
 
 const NavBar = () => {
-	const userInfo = useUserInfo();
-	const router = useRouter();
-
-	const handleLogout = () => {
-		logoutUser(router);
-	};
+	const AuthButton = dynamic(
+		() => import("@/component/UI/AuthButton/AuthButton"),
+		{
+			ssr: false,
+			loading: () => <Spinner />,
+		}
+	);
+	const LinksAuth = dynamic(
+		() => import("@/component/UI/LinksAuth/LinksAuth"),
+		{
+			ssr: false,
+			loading: () => <Spinner />,
+		}
+	);
 
 	return (
 		<div className="navbar bg-base-100 fixed top-0 left-0 w-full shadow-md z-50 px-6 h-24">
@@ -48,7 +55,7 @@ const NavBar = () => {
 							<li>
 								<Link
 									href="/"
-									className="text-[16px] text-gray-700 hover:text-teal-600 transition"
+									className="lg:text-lg lg:text-black font-bold lg:hover:text-teal-500 text-[16px] text-gray-700 hover:text-teal-600 transition"
 								>
 									Home
 								</Link>
@@ -56,7 +63,7 @@ const NavBar = () => {
 							<li>
 								<Link
 									href="/about"
-									className="text-[16px] text-gray-700 hover:text-teal-600 transition"
+									className="lg:text-lg lg:text-black font-bold lg:hover:text-teal-500 text-[16px] text-gray-700 hover:text-teal-600 transition"
 								>
 									About Us
 								</Link>
@@ -64,19 +71,13 @@ const NavBar = () => {
 							<li>
 								<Link
 									href="/travels"
-									className="text-[16px] text-gray-700 hover:text-teal-600 transition"
+									className="lg:text-lg lg:text-black font-bold lg:hover:text-teal-500 text-[16px] text-gray-700 hover:text-teal-600 transition"
 								>
 									Travels
 								</Link>
 							</li>
-							<li>
-								<Link
-									href="/my-profile"
-									className="text-[16px] text-gray-700 hover:text-teal-600 transition"
-								>
-									My Profile
-								</Link>
-							</li>
+
+							<LinksAuth />
 						</ul>
 					</div>
 					<div className="flex items-center gap-2">
@@ -121,37 +122,13 @@ const NavBar = () => {
 								Travels
 							</Link>
 						</li>
-						<li>
-							<Link
-								href="/my-profile"
-								className="text-lg text-black font-bold hover:text-teal-500 transition"
-							>
-								My Profile
-							</Link>
-						</li>
+
+						<LinksAuth />
 					</ul>
 				</div>
 
-				<div className="navbar-end flex justify-end gap-4">
-					{userInfo?.id ? (
-						<button
-							onClick={handleLogout}
-							className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-8 rounded mt-4"
-						>
-							Logout
-						</button>
-					) : (
-						<Link href="/login">
-							<button className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-8 rounded mt-4">
-								Login
-							</button>
-						</Link>
-					)}
-					<Link href="/dashboard">
-						<button className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-3 rounded mt-4">
-							<FaUser className="inline-block" />
-						</button>
-					</Link>
+				<div className="navbar-end flex justify-end gap-2">
+					<AuthButton />
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,4 @@
 "use client";
-
 import {
 	useGetMyProfileQuery,
 	useUpdateMyProfileMutation,
@@ -7,40 +6,50 @@ import {
 import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import Image3 from "@assets/image-3.jpg";
-
 import { FaUpload } from "react-icons/fa";
 import Link from "next/link";
 import TravelPosts from "@/component/Profile/travelPosts";
 import SubmitTravelRequest from "@/component/Profile/SubmitTravelrequest";
 import ProfileFileUploader from "@/component/Forms/ProfileFileUploader";
+import Spinner from "@/component/Shared/Spinner/Spinner";
 
 const MyProfile = () => {
 	const router = useRouter();
 	const { data, refetch } = useGetMyProfileQuery({});
-	console.log(data);
 
 	const [updateMyProfile, { isLoading: uploading }] =
 		useUpdateMyProfileMutation({});
 	const id = data?.id;
 	const [loading, setLoading] = useState(false);
+	const [profileImage, setProfileImage] = useState(
+		data?.userProfile?.profileImage
+	);
 
-	const fileUploadHandler = (file: File) => {
+	const fileUploadHandler = async (file: File) => {
 		const formData = new FormData();
 		formData.append("file", file);
 		formData.append("data", JSON.stringify({}));
 		updateMyProfile(formData);
+		try {
+			const updatedProfile = await updateMyProfile(formData).unwrap();
+			if (updatedProfile) {
+				setProfileImage(updatedProfile.userProfile.profileImage);
+				refetch();
+			}
+		} catch (error) {
+			console.error("Failed to upload profile image", error);
+		}
 	};
 
 	const handleClick = async () => {
 		setLoading(true);
 		await new Promise((resolve) => setTimeout(resolve, 2000));
-		router.push("http://localhost:3000/dashboard/change-password");
+		router.push("http://localhost:3000/change-password");
 	};
 
 	return (
 		<div className="container mx-auto px-4 py-10 ">
-			<h5 className="text-teal-500 mb-4 text-3xl py-6 font-extrabold">
+			<h5 className="text-teal-500 mb-4 mt-8 text-3xl py-6 font-extrabold">
 				Personal Information
 			</h5>
 			<div className="flex flex-wrap">
@@ -55,7 +64,7 @@ const MyProfile = () => {
 					<div className="flex flex-wrap mt-10 w-full">
 						<div className="w-[100%] lg:w-[92%] mb-3 text-lg gap-4">
 							{uploading ? (
-								<span className="my-6">Uploading.....</span>
+								<Spinner />
 							) : (
 								<ProfileFileUploader
 									name="file"

@@ -31,7 +31,7 @@ const TravelDetails = ({ params }: TProps) => {
 		}
 	}, [getTrip]);
 
-	if (isLoading) return <div className="my-4">Loading...</div>;
+	if (isLoading) return <div className="my-4 text-teal-600">Loading...</div>;
 
 	const handleBuddyReq = async () => {
 		const toastId = toast.loading("Requesting...");

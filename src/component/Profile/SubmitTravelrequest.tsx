@@ -1,10 +1,10 @@
 import React from "react";
 import { useGetTravelBuddyQuery } from "@/redux/api/travelBuddyApi";
 import { useGetMyProfileQuery } from "@/redux/api/profileApi";
+import Spinner from "../Shared/Spinner/Spinner";
 
 const SubmitTravelRequest = () => {
 	const { data: getMyProfile, isLoading } = useGetMyProfileQuery({});
-	console.log(getMyProfile);
 
 	return (
 		<div className="container mx-auto mt-10  lg:max-w-8xl">
@@ -13,9 +13,7 @@ const SubmitTravelRequest = () => {
 			</h2>
 
 			{isLoading ? (
-				<div className="text-center text-xl m-3 text-teal-600 font-extrabold">
-					Loading...
-				</div>
+				<Spinner />
 			) : (
 				<div className="overflow-x-auto bg-white shadow-md rounded-sm w-full max-w-full">
 					<table className="min-w-full bg-white">

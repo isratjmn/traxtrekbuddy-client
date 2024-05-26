@@ -4,6 +4,7 @@ import { useGetAllTipsQuery } from "@/redux/api/tripApi";
 import { useDebounced } from "@/redux/hooks";
 import Image from "next/image";
 import Pagination from "@/component/Forms/Pagination";
+import Spinner from "@/component/Shared/Spinner/Spinner";
 
 const ITEMS_PER_PAGE = 8;
 
@@ -48,9 +49,9 @@ const AllTrips = () => {
 				/>
 			</div>
 			{isLoading ? (
-				<div className="text-center text-xl m-3 text-teal-600 font-extrabold">
-					Loading...
-				</div>
+				
+					<Spinner />
+				
 			) : (
 				<>
 					<div className="overflow-x-auto">

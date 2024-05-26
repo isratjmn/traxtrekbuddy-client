@@ -1,5 +1,4 @@
 import { authenKeys } from "@/constant/authenKeys";
-import { instance as axiosInstance } from "@/helpers/axios/axiosInstance";
 import { decordedToken } from "@/utilities/jwtDecode";
 
 import {
@@ -18,7 +17,7 @@ export const getUserInfo = () => {
 		const decordedData: any = decordedToken(authToken);
 		return {
 			...decordedData,
-			role: decordedData?.role,
+			role: decordedData?.role.toLowerCase(),
 		};
 	}
 };

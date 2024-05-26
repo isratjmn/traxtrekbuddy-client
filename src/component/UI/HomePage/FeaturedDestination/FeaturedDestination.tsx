@@ -43,7 +43,7 @@ const destinations = [
 
 const FeaturedDestinations = () => {
 	return (
-		<section className="py-12">
+		<section className="py-12 mb-16">
 			<div className="container mx-auto px-4">
 				<h2 className="text-4xl mx-auto font-bold mb-7">
 					Featured Destinations
