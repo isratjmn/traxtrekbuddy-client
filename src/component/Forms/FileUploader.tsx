@@ -16,7 +16,6 @@ const FileUploader = ({
     name,
     label,
     accept,
-
     variant = "contained",
     onFileUpload,
 }: IFileUploadButton) => {

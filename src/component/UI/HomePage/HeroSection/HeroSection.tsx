@@ -6,9 +6,9 @@ import iconShare from "@assets/play.svg";
 
 const HeroSection = () => {
     return (
-        <section className="container mx-auto flex flex-col space-y-10 py-10 pb-32 lg:py-20 xl:space-y-0 xl:space-x-10 md:flex-row">
+        <section className="container mx-auto flex mt-16 flex-col space-y-10 py-10 pb-32 lg:py-20 xl:space-y-0 xl:space-x-10 md:flex-row">
             <div className="relative z-20 flex flex-1 flex-col md:w-1/2">
-                <h1 className="font-bold w-[80%] text-4xl lg:text-6xl">Travel, enjoy and live a new and full life </h1>
+                <h1 className="font-bold w-[80%] text-4xl lg:text-6xl z-[-3]">Travel, enjoy and live a new and full life </h1>
                 <p className="text-lg mt-2 lg:mt-4 text-gray-500 xl:max-w-[520px]">
                     We want to be on each of your journeys seeking the satisfaction of seeing the incorruptible beauty of nature. We can help you on an adventure around the world in just one app.
                 </p>

@@ -6,7 +6,7 @@
 
 ### Live Project Link: [text](https://traxtrek-client.vercel.app/)
 
-### Github Repository Link: Front-end: < ttps://github.com/isratjmn/traxtrekbuddy-client>
+### Github Repository Link: Front-end: <https://github.com/isratjmn/traxtrekbuddy-client>
 
 ### Video Presentation Link: [text](https://drive.google.com/file/d/10CP9Zs_Y1javfHWKlurqxzh6J93Lk0Dz/view?usp=sharing)
 
