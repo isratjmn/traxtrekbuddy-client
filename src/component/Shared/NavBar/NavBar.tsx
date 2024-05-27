@@ -31,7 +31,7 @@ const NavBar = () => {
 						<div
 							tabIndex={0}
 							role="button"
-							className="btn btn-ghost lg:hidden mr-2"
+							className="btn btn-ghost lg:hidden mr-0 md:mr-2"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@ const NavBar = () => {
 							<LinksAuth />
 						</ul>
 					</div>
-					<div className="flex items-center gap-2">
+					<div className="flex md:text-xl text-base font-extrabold items-center gap-2">
 						<Image
 							src={logo}
 							width={40}
@@ -89,9 +89,12 @@ const NavBar = () => {
 						/>
 						<Link
 							href="/"
-							className="text-2xl font-bold text-black hover:text-teal-500 transition"
+							className="text-base md:text-2xl font-extrabold text-black hover:text-teal-500 transition"
 						>
-							Trek<span className="text-teal-600">Trex</span>
+							Trek
+							<span className="text-teal-600 text-base md:text-2xl font-extrabold">
+								Trex
+							</span>
 							-Travel
 						</Link>
 					</div>

@@ -52,12 +52,6 @@ const Sidebar = () => {
 		},
 	];
 	const commonItems = [
-/* 		{
-			title: "Change Password",
-			path: "/change-password",
-			icon: <TbPasswordFingerprint />,
-			onClick: () => logoutUser(router),
-		}, */
 		{
 			title: "Logout",
 			path: "/",

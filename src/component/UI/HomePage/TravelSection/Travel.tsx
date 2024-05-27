@@ -4,7 +4,7 @@ import TravelCard from "./TravelCard";
 import { formattedDates } from "@/utilities/formatDates";
 
 const Travel = async () => {
-	const res = await fetch("http://localhost:5000/api/trips", {
+	const res = await fetch("https://trektrax-server.vercel.app/api/trips", {
 		next: {
 			revalidate: 30,
 		},

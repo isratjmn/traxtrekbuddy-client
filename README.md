@@ -1,46 +1,128 @@
 # TrekTrax TravelBuddy Client
 
-#### The Travel Buddy Matching assignment is aimed at building a web application that facilitates users in finding travel buddies for their trips. The application provides features for user registration, trip creation, travel buddy requests, and user profiles
-
-#### Users can register, create trips with details like destination, dates, budget, and activities, and send/receive travel buddy requests for their trips. Additionally, users can update their profile information
+#### The Travel Buddy Matching Application is a platform designed to connect travelers with compatible travel buddies based on their preferences, interests, and travel plans. Users can create profiles, search for potential travel partners, and plan trips together, fostering a community of like-minded adventurers.
 
 ### Live Project Link: [text](https://traxtrek-client.vercel.app/)
 
+### Live Server-site Link: [text](https://trektrax-server.vercel.app/)
+
 ### Github Repository Link: Front-end: <https://github.com/isratjmn/traxtrekbuddy-client>
+
+### Github Repository Link: Back-end: <https://github.com/isratjmn/traxtrekbuddy-client>
 
 ### Video Presentation Link: [text](https://drive.google.com/file/d/10CP9Zs_Y1javfHWKlurqxzh6J93Lk0Dz/view?usp=sharing)
 
-## Getting Started
+### Table of Contents
 
-First, run the development server:
+1. [Home Page/Landing Page](#home-page-landing-page)
+2. [Login & Registration](#login--registration)
+3. [Post a Travel/Trip (Private Page)](#post-a-traveltrip-private-page)
+4. [Travels Page](#travels-page)
+5. [Travel Details Page](#travel-details-page)
+6. [Travel Request Page (Private)](#travel-request-page-private)
+7. [My Profile](#my-profile)
+8. [Admin Dashboard](#admin-dashboard)
+9. [Change Password Page](#change-password-page)
+10. [About Us](#about-us)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 1. Home Page/Landing Page
 
-Open [http://localhost:3000](https://traxtrek-client.vercel.app/) with your browser to see the result.
+#### Header:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Logo
+- Navigation Bar: Links to Home, About Us, Login/Register (if not logged in), My Profile (if logged in)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+#### Hero Section:
 
-## Learn More
+- Catchy Headline
+- "Share Your Trip" button
 
-To learn more about Next.js, take a look at the following resources:
+#### Searching Options:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Search Bar: Search for trips by destination, travel dates, and travel type
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### Travel Posts:
 
-## Deploy on Vercel
+- Display recent travel posts in card format
+- See More Button to view all trips
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Extra Sections (Unique and Relevant):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Featured Destinations
+- Travel Tips and Guides
+
+#### Footer:
+
+- Contact Information
+- Copyright Information
+- Additional Links: Terms of Use, Privacy Policy
+
+### 2. Login & Registration
+
+#### Login Form:
+
+- Fields: Username or email address, Password
+
+#### Registration Form:
+
+- Fields: Username, Email address, Password (with confirmation)
+
+### 3. Post a Travel/Trip (Private Page)
+
+- Form Fields: Destination, Detailed description, Travel dates, Travel type, Upload photos
+- Submit Button
+
+### 4. Travels Page
+
+- Search and Filter Options
+- Travel Cards with pagination
+
+### 5. Travel Details Page
+
+- Detailed information about the trip
+- Multiple photos, Detailed description, Itinerary, Travel dates, Travel type, Location
+- Travel Request Button
+
+### 6. Travel Request Page (Private)
+
+- Form Fields: User's contact information, Additional Information, Agreement to terms and conditions
+- Submit Button
+
+### 7. My Profile
+
+- Edit Profile: Options to edit username and email
+- Change Password: Link to Change Password page
+- Travel Request History
+- Travel Posts
+
+### 8. Admin Dashboard
+
+- User Management: View and Manage User Accounts, Activate/deactivate accounts, edit roles
+- Trip Management: View and Manage Travel Posts, Edit or remove trip listings
+
+### 9. Change Password Page
+
+- Fields: Current password, New password (with confirmation)
+
+### 10. About Us
+
+- Mission Statement
+- Team Information
+- Contact Information
+
+### 11. Additional Considerations
+
+- Secure Login System: Implement password hashing
+- Responsive Design: Ensure accessibility and user-friendliness on various devices
+
+## Installation and Setup
+
+1. Clone this repository: `git clone <repository_url>`
+
+2. Install dependencies: `npm install`
+
+3. Set up the environment variables by creating a `.env` file and filling in the required variables based on the provided `.env.example` file.
+
+4. Run the database migrations: `npx prisma migrate dev`
+
+5. Start the server: `npm run start`

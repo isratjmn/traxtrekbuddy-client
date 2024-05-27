@@ -80,10 +80,8 @@ const FeaturedDestinations = () => {
 										{destination.name}
 									</p>
 								</div>
-								<div className="absolute bottom-0 left-0 right-0 px-4 py-3 bg-white bg-opacity-75">
-									<p className="text-gray-900">
-										{destination.description}
-									</p>
+								<div className="absolute bottom-0 font-bold left-0 right-0 px-4 py-3 bg-white bg-opacity-75">
+									{destination.description}
 								</div>
 							</div>
 						</motion.div>

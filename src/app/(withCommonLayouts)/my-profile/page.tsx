@@ -44,7 +44,7 @@ const MyProfile = () => {
 	const handleClick = async () => {
 		setLoading(true);
 		await new Promise((resolve) => setTimeout(resolve, 2000));
-		router.push("http://localhost:3000/change-password");
+		router.push("https://traxtrek-client.vercel.app/change-password");
 	};
 
 	return (
@@ -58,7 +58,7 @@ const MyProfile = () => {
 						src={data?.userProfile?.profileImage}
 						width={500}
 						height={500}
-						alt="brand logo"
+						alt="ProfileImg"
 					/>
 
 					<div className="flex flex-wrap mt-10 w-full">
