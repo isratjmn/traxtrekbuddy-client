@@ -10,7 +10,6 @@
 
 ### Github Repository Link: Back-end: <https://github.com/isratjmn/traxtrekbuddy-server>
 
-### Video Presentation Link: [Presentation](https://drive.google.com/file/d/10CP9Zs_Y1javfHWKlurqxzh6J93Lk0Dz/view?usp=sharing)
 
 ### Table of Contents
 

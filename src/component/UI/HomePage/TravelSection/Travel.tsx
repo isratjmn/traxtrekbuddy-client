@@ -9,6 +9,7 @@ const Travel = async () => {
 			revalidate: 30,
 		},
 	});
+	
 	if (!res.ok) {
 		console.error("Failed to fetch trips");
 		return <div>Failed to load trips</div>;

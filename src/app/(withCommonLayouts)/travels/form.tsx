@@ -11,20 +11,24 @@ import { FieldValues, useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 
+// Sample dropdown options
+const destinationOptions = [
+	"Paris",
+	"London",
+	"Rome",
+	"New York",
+	"Tokyo",
+	"Sydney",
+];
+
 const itineraryOptions = [
 	"Day 1: Arrive in Paris, visit the Eiffel Tower",
 	"Day 2: Louvre Museum and Seine River cruise",
 	"Day 3: Travel to London, visit the British Museum",
 	"Day 4: Buckingham Palace and London Eye",
-	"Day 1: Arrive in New York, visit Times Square",
-	"Day 2: Central Park and Museum of Modern Art",
-	"Day 3: Statue of Liberty and Ellis Island",
-	"Day 1: Arrive in Tokyo, visit Shibuya Crossing",
-	"Day 2: Tokyo Tower and Roppongi Hills",
-	"Day 3: Day trip to Mt. Fuji",
-	"Day 1: Arrive in Sydney, visit the Sydney Opera House",
-	"Day 2: Sydney Harbour Bridge climb",
-	"Day 3: Bondi Beach and coastal walk",
+	"Day 5: Travel to Rome, visit the Colosseum",
+	"Day 6: Vatican City and St. Peter's Basilica",
+	"Day 7: Free day in Rome",
 ];
 
 const defaultValues = {
@@ -33,9 +37,8 @@ const defaultValues = {
 	startDate: "",
 	endDate: "",
 	travelType: "",
-	itinerary: [],
+	itinerary: "",
 	location: "",
-	budget: 0,
 };
 
 const TravelPostForm = () => {
@@ -57,9 +60,6 @@ const TravelPostForm = () => {
 			setError("User not authenticated...!");
 			return;
 		}
-		// Convert budget to number
-		values.budget = Number(values.budget);
-
 		const data = payloadModify(values, file);
 		try {
 			const res = await createTrip(data).unwrap();
@@ -74,12 +74,11 @@ const TravelPostForm = () => {
 			toast.error("Error creating trip. Please try again.");
 		}
 	};
-
 	return (
 		<>
-			<div className="bg-gray-100 mt-24 px-16 py-16 max-w-[850px] rounded-lg mx-auto">
+			<div className="bg-gray-100 mt-24  px-16 py-16 max-w-[850px] rounded-lg mx-auto">
 				<Toaster position="top-center" />
-				<h2 className="text-3xl font- mt-6 mb-6 text-teal-600">
+				<h2 className="text-2xl font-bold mt-6 mb-6 text-teal-600">
 					Post a Travel
 				</h2>
 				<TTForms onSubmit={onSubmit} defaultValues={defaultValues}>
@@ -88,12 +87,15 @@ const TravelPostForm = () => {
 							name="destination"
 							label="Destination"
 							fullWidth
+							required
+							options={destinationOptions}
 						/>
 						<TTInput
 							name="description"
 							label="Detailed Description"
 							type="text"
 							fullWidth
+							required
 						/>
 						<TTDatePicker name="startDate" label="Start Date" />
 						<TTDatePicker name="endDate" label="End Date" />
@@ -104,14 +106,23 @@ const TravelPostForm = () => {
 							fullWidth
 							required
 						/>
-
 						<TTInput
-							name="location"
-							label="Location"
+							name="itinerary"
+							label="Itinerary"
 							type="text"
 							fullWidth
 							required
+							options={itineraryOptions}
 						/>
+						<div className="col-span-1 md:col-span-2">
+							<TTInput
+								name="location"
+								label="Location"
+								type="text"
+								fullWidth
+								required
+							/>
+						</div>
 
 						<TTInput
 							name="budget"
@@ -119,15 +130,6 @@ const TravelPostForm = () => {
 							type="number"
 							fullWidth
 							required
-						/>
-						<TTInput
-							name="itinerary"
-							label="Itinerary"
-							type="text"
-							fullWidth
-							required
-							select
-							options={itineraryOptions}
 						/>
 						<div className="grid gap-4">
 							<div className="col-span-1 md:col-span-1">

@@ -1,5 +1,4 @@
 "use client";
-
 import TTForms from "@/component/Forms/TTForms";
 import TTInput from "@/component/Forms/TTInput";
 import { UserLogin } from "@/services/actions/UserLogin";
@@ -106,7 +105,7 @@ const LoginPage = () => {
 							</div>
 						)}
 						<p className="text-black font-semibold mt-4">
-							Don&apos;t have an account?{" "}
+							Don&apos;t have an account?
 							<Link href="/register">
 								<strong className="text-teal-500">
 									Create an account

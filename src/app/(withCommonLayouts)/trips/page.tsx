@@ -6,25 +6,24 @@ import Image from "next/image";
 import Pagination from "@/component/Forms/Pagination";
 import Spinner from "@/component/Shared/Spinner/Spinner";
 import Link from "next/link";
+import { RxCross2 } from "react-icons/rx";
 
 const ITEMS_PER_PAGE = 9;
-
 const formatDate = (dateString: string | number | Date) => {
 	const date = new Date(dateString);
 	return date.toISOString().split("T")[0];
 };
-
 const filters = [
 	{
 		label: "Travel Type",
 		options: [
-			"Nature and Adventure",
+			"Leisure",
 			"Relaxation",
 			"Cultural",
 			"Business",
 			"Historical",
-			"Adventure and Trekking",
-			"Sailing",
+			"Adventure",
+			"Sightseeing",
 			"Wildlife",
 		],
 		key: "travelType",
@@ -33,7 +32,7 @@ const filters = [
 		label: "Location",
 		options: [
 			"Cairo, Luxor, Aswan, Egypt",
-			"Rome, Italy",
+			"Edinburgh, United Kingdom",
 			"Machu Picchu, Peru",
 			"Egypt",
 		],
@@ -44,11 +43,10 @@ const filters = [
 		options: [
 			"Japan",
 			"Egypt",
-			"Croatia",
+			"New York City, USA",
 			"Norway",
-			"Greece",
 			"Italy",
-			"Nepal",
+			"Dubai, UAE",
 			"Tarangire National Park, Tanzania",
 			"Historical Tour of Rome",
 		],
@@ -66,9 +64,7 @@ const AllTrips = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>({});
 	const [showClearAll, setShowClearAll] = useState(false);
-
 	const debouncedTerm = useDebounced({ searchQuery: searchTerm, delay: 600 });
-
 	useEffect(() => {
 		setShowClearAll(Object.keys(selectedFilters).length > 0);
 	}, [selectedFilters]);
@@ -87,7 +83,6 @@ const AllTrips = () => {
 			return newFilters;
 		});
 	};
-
 	const handleClearAllFilters = () => {
 		setSelectedFilters({});
 	};
@@ -105,31 +100,28 @@ const AllTrips = () => {
 
 	const { data, isLoading } = useGetAllTipsQuery(query);
 	const trips = data?.trips || [];
-
 	const totalTrips = trips.length;
 	const totalPages = Math.ceil(totalTrips / ITEMS_PER_PAGE);
-
 	const paginatedTrips = trips.slice(
 		(currentPage - 1) * ITEMS_PER_PAGE,
 		currentPage * ITEMS_PER_PAGE
 	);
-
 	const handlePageChange = (page: React.SetStateAction<number>) => {
 		setCurrentPage(page);
 	};
 
 	return (
-		<div className="container mx-auto mt-24 max-w-screen-xl">
-			<div className="my-8 flex justify-center space-x-4">
+		<div className="container mx-auto mt-24 max-w-screen-xl px-4">
+			<div className="my-8 flex flex-col sm:flex-row sm:flex-wrap justify-center space-x-0 sm:space-x-4 space-y-4 sm:space-y-0">
 				<input
 					type="text"
 					placeholder="Search trips....."
-					className="border-2 border-purple-700 rounded p-2"
+					className="border-2 border-purple-700 rounded p-2 flex-grow"
 					value={searchTerm}
 					onChange={(e) => setSearchTerm(e.target.value)}
 				/>
 				{filters.map((filter, index) => (
-					<div key={index} className="relative">
+					<div key={index} className="relative flex-grow">
 						<select
 							value={
 								selectedFilters[filter.key as FilterKeys] || ""
@@ -140,7 +132,7 @@ const AllTrips = () => {
 									e.target.value
 								)
 							}
-							className="border-2 border-purple-700 rounded p-2"
+							className="border-2 border-purple-700 rounded p-2 w-full"
 						>
 							<option value="">{filter.label}</option>
 							{filter.options.map((option, idx) => (
@@ -155,17 +147,29 @@ const AllTrips = () => {
 									handleClearFilter(filter.key as FilterKeys)
 								}
 								className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"
-							></button>
+							>
+								<RxCross2 />
+							</button>
 						)}
 					</div>
 				))}
 			</div>
+			{showClearAll && (
+				<div className="my-4 flex justify-center">
+					<button
+						onClick={handleClearAllFilters}
+						className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition-colors duration-300"
+					>
+						Clear All Filters
+					</button>
+				</div>
+			)}
 
 			{isLoading ? (
 				<Spinner />
 			) : (
 				<>
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 rounded-3xl">
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 rounded-3xl">
 						{paginatedTrips.map((trip) => (
 							<div
 								key={trip?.id}
@@ -177,8 +181,8 @@ const AllTrips = () => {
 										<Image
 											src={trip.photos}
 											alt={trip.destination}
-											width={150}
-											height={300}
+											width={200}
+											height={350}
 											className="object-cover w-full h-full"
 										/>
 									)}

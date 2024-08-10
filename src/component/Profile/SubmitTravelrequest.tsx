@@ -1,7 +1,14 @@
 import React from "react";
-import { useGetTravelBuddyQuery } from "@/redux/api/travelBuddyApi";
+
 import { useGetMyProfileQuery } from "@/redux/api/profileApi";
 import Spinner from "../Shared/Spinner/Spinner";
+import { useGetTravelBuddyQuery } from "@/redux/api/travelBuddyApi";
+
+type TParams = {
+	params: {
+		tripId: string;
+	};
+};
 
 const SubmitTravelRequest = () => {
 	const { data: getMyProfile, isLoading } = useGetMyProfileQuery({});
@@ -53,7 +60,7 @@ const SubmitTravelRequest = () => {
 														{item?.status}
 													</span>
 												) : item?.status ===
-												  "APPROVED" ? (
+												"APPROVED" ? (
 													<span className="font-semibold text-blue-500">
 														{item?.status}
 													</span>

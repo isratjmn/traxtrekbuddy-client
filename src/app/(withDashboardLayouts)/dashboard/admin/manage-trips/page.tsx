@@ -99,8 +99,8 @@ const ManageTrips = () => {
 													src={trip.photos}
 													alt={trip.destination}
 													width={100}
-													height={100}
-													className="object-cover rounded"
+													height={80}
+													className="object-cover rounded h-20"
 												/>
 											)}
 										</td>
@@ -122,7 +122,7 @@ const ManageTrips = () => {
 												href={`/admin-trip/${trip?.id}`}
 											>
 												<button className="text-indigo-600 hover:text-indigo-900 mr-4">
-													<FaEdit className="text-2xl" />{" "}
+													<FaEdit className="text-2xl" />
 												</button>
 												Edit
 											</Link>

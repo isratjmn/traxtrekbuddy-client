@@ -22,11 +22,16 @@ const EditTripForm = ({ params }: TParams) => {
 		error: errorTips,
 		refetch: refetchTrip,
 	} = useGetTripQuery(id);
+
 	const [updateTrip, { isLoading: updating }] = useUpdateTripMutation();
 
 	const onSubmit = async (values: FieldValues) => {
 		try {
-			const res = await updateTrip({ id, body: values }).unwrap();
+			const updatedValues = {
+				...values,
+				budget: Number(values.budget),
+			};
+			const res = await updateTrip({ id, body: updatedValues }).unwrap();
 			if (res?.id) {
 				toast.success("Profile Updated Successfully....!!");
 				refetchTrip();
@@ -41,6 +46,7 @@ const EditTripForm = ({ params }: TParams) => {
 		description: getTrip?.description || "",
 		startDate: getTrip?.startDate || "",
 		endDate: getTrip?.endDate || "",
+		budget: getTrip?.budget ? Number(getTrip.budget) : 0,
 	};
 
 	return (
@@ -51,7 +57,7 @@ const EditTripForm = ({ params }: TParams) => {
 					Update Your Trip
 				</h1>
 				<TTForms onSubmit={onSubmit} defaultValues={defaultValues}>
-					<div className="grid grid-cols-1 pt-4 gap-4 mt-2 mb-4">
+					<div className="grid grid-cols-1 pt-2 gap-4 mt-2 mb-4">
 						<div className="flex">
 							<div className="mr-2 w-1/2">
 								<TTInput
@@ -71,7 +77,7 @@ const EditTripForm = ({ params }: TParams) => {
 							</div>
 						</div>
 					</div>
-					<div className="grid grid-cols-1 pt-4 gap-4 mt-2 mb-4">
+					<div className="grid grid-cols-1 pt-2 gap-4 mt-2 mb-4">
 						<div className="flex">
 							<div className="mr-2 w-1/2">
 								<TTDatePicker
@@ -81,6 +87,27 @@ const EditTripForm = ({ params }: TParams) => {
 							</div>
 							<div className="ml-2 w-1/2">
 								<TTDatePicker name="endDate" label="End Date" />
+							</div>
+						</div>
+					</div>
+					<div className="grid grid-cols-1 pt-2 gap-4 mt-2 mb-4">
+						<div className="flex">
+							{/* <div className="mr-2 w-1/2">
+								<TTInput
+									name="location"
+									label="Location"
+									type="text"
+									fullWidth
+									required
+								/>
+							</div> */}
+							<div className="mr-2 w-full">
+								<TTInput
+									name="budget"
+									label="Budget"
+									type="number"
+									fullWidth
+								/>
 							</div>
 						</div>
 					</div>

@@ -42,9 +42,13 @@ const TravelCard = ({ trip }: { trip: any }) => {
 					</span>
 				</div>
 
-				<span className="text-gray-600 text-lg px-4">
+				<span className="text-gray-600 pb-2 text-lg px-4">
 					<strong>Travel Type: </strong>
 					{trip?.travelType}
+				</span>
+				<span className="text-gray-600 text-lg px-4">
+					<strong>Travel Budget: </strong>
+					{trip?.budget}$
 				</span>
 
 				<div className="px-4 py-6">

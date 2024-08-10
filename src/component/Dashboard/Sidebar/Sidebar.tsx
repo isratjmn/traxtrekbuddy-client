@@ -40,7 +40,11 @@ const Sidebar = () => {
 		{
 			title: "Dashboard",
 			path: "/dashboard/admin",
-			icon: <MdOutlineDashboard style={{ fontSize: "24px" }} />,
+			icon: (
+				<MdOutlineDashboard
+					style={{ fontSize: "24px", alignItems: "center" }}
+				/>
+			),
 		},
 		{
 			title: "Manage Users",
